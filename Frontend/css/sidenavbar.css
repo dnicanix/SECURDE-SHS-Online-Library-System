@@ -117,7 +117,7 @@ body {
 .constructor {
   position: relative;
   margin: 0;
-  padding: 0 50px;
+  padding: 0 100px;
   -webkit-transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
   -o-transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
   transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
@@ -212,35 +212,44 @@ body {
   content: "\e610";
 }
 .sidebar .sidebar-image img {
-  width: 54px;
-  height: 54px;
+  width: 121px;
+  height: 125px;
   margin: 16px;
+  margin-bottom: 0px;
   border-radius: 50%;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+    
+  /* to center account image */
+  margin-left:50px;
 }
 .sidebar .sidebar-brand {
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0;
   left: 0;
   right: 0;
   display: block;
-  height: 48px;
+  height: 50px;
   line-height: 48px;
   padding: 0;
-  padding-left: 16px;
-  padding-right: 56px;
+  /*padding-left: 16px;
+  padding-right: 56px;*/
   text-decoration: none;
   clear: both;
   font-weight: 500;
-  overflow: hidden;
+  /*overflow: hidden;*/
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+    
+  /*account name*/
+  font-size: 14px;
+  text-align: center;
+
 }
 .sidebar .sidebar-brand:hover,
 .sidebar .sidebar-brand:focus {
@@ -334,6 +343,7 @@ body {
 .sidebar .sidebar-nav {
   margin: 0;
   padding: 0;
+  margin-top:50px;
 }
 .sidebar .sidebar-nav li {
   position: relative;
@@ -407,7 +417,7 @@ body {
 .sidebar-default .sidebar-brand:hover,
 .sidebar-default .sidebar-brand:focus {
   color: #212121;
-  background-color: rgba(0, 0, 0, 0.1);
+  /*background-color: rgba(0, 0, 0, 0.1);*/
 }
 .sidebar-default .sidebar-badge {
   color: #ffffff;
@@ -800,7 +810,7 @@ body {
     height: 135px;
   }
   .sidebar .sidebar-image img {
-    width: 44px;
-    height: 44px;
+        width: 111px;
+        height: 115px;
   }
 }

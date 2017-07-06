@@ -56,16 +56,22 @@ input{
 
 .jumbotron{
     margin-top:-20px;   
-    margin-left:-50px;
-    margin-right:-50px;
-    background-color: #E4E4E4;
+    background-color:floralwhite;
     padding-top: 0px;
     padding-bottom:0px;
     background-size: cover;
     background: contain;
     height: 80px; /* define the height in pixels or make sure   */
                    /* you have something in your div with height */
-                   /* so you can see your image */
+                   /* so you ca;n see your image */
+    background-image: url("../img/bg_header.jpg");
+    background-position: center; 
+}
+
+.img-rounded{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95989A;
 }
 
 #table_meetingrooms>tbody>tr>td{

@@ -27,14 +27,15 @@
         <!-- Sidebar header -->
         <div class="sidebar-header header-cover">
             <!-- Sidebar brand image -->
+            <a href = "#" title = "Logout"><img src = "img/ic_logout.png" style = "float:right;margin-top:10px;margin-right:10px;" width = "30" height = "30"></a>
             <center>
                 <div class="sidebar-image">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53474/atom_profile_01.jpg">
+                    <img src="img/ic_student.png" class = "img-rounded">
                 </div>
             </center>
             <!-- Sidebar brand name -->
             <div class="sidebar-brand">
-                Danica Sevilla
+                Danica Sevilla  <p style = "margin-top:-30px;font-size:12px;">Student</p>
             </div>
         </div>
 
@@ -68,15 +69,15 @@
     </aside>
 
     <div class="wrapper">
+        <center>
+            <div class="jumbotron">
+                <h3> <img src="img/ic_dlsu.png" width = 80; height = 80; style = "margin-right:10px;"/>DLSU Senior High School (SHS) Online Library</h3>      
+            </div>
+        </center>  
         <!-- Sidebar Constructor -->
         <div class="constructor">
-            <center>
-                <div class="jumbotron">
-                    <h3> <img src="img/ic_dlsu.png" width = 80; height = 80; style = "margin-right:10px;"/>DLSU Senior High School (SHS) Online Library</h3>      
-                </div>
-            </center>
             <div class = "row">
-                <p class="pageheader">> Meeting Rooms</p>
+                <p class="pageheader"> <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Meeting Rooms</p>
             </div>
             <center>
             <fieldset class="fieldset_legend" style = "max-width:335px;">
@@ -91,6 +92,7 @@
                 </div>
                 
             </fieldset>
+            <br>
             <form class="form-horizontal">
                 <div class="form-group">
                     <div class = "col-sm-4"></div>
@@ -201,7 +203,13 @@
             </table>
             <div class="collapse" id="collapse_reserve">
               <div class="well">
-                <p id = "p_reserve">Do you want to reserve room?</p><button id = "button_reserve" type="button" class="btn btn-default">YES</button> <button id = "button_cancel" type="button" class="btn btn-default" data-dismiss = "collapse" target="#collapse_reserve" data-dismiss="collapse">CANCEL</button>
+                <p id = "p_reserve">Do you want to reserve room?</p>
+                  <button id = "button_reserve" type="button" class="btn btn-primary">
+                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> YES
+                  </button> 
+                  <button id = "button_cancel" type="button" class="btn btn-primary" data-dismiss = "collapse" target="#collapse_reserve" data-dismiss="collapse">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  CANCEL
+                  </button>
               </div>
             </div>
             </center>
