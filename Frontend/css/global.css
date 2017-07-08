@@ -44,6 +44,15 @@ input{
     margin-right:20px;
 }
 
+.img_ic_review{
+    width:16px;
+    height:16px;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+}
+
 #img_studentreview{
     border-style: solid;
     border-width: 1px;
@@ -72,6 +81,11 @@ input{
     border-style: solid;
     border-width: 1px;
     border-color: #95989A;
+}
+
+.tooltip-inner {
+    min-width: 200px;
+    max-width: 100%; 
 }
 
 #table_meetingrooms>tbody>tr>td{
@@ -118,3 +132,5 @@ hr.style8:after {
 	border-top: 1px solid #8c8b8b;
 	border-bottom: 1px solid #fff;
 }
+
+

@@ -32,7 +32,6 @@ body{
     margin:auto;
 
     /*this to solve "the content will not be cut when the window is smaller than the content": */
-    overflow:auto;
 }
 
 #ic_archer{
