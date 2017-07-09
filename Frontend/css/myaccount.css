@@ -36,6 +36,7 @@
 #button_editprofile{
     width:150px;
     float:right;
+    margin-right:10px;
 }
 
 #button_changepassword{
@@ -63,3 +64,8 @@ collapse.in, .collapse{
   height: 200px;
   max-height:200px;
 }
+
+.form-control{
+    height: 30px !important;
+}
+

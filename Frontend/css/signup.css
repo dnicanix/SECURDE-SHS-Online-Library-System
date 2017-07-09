@@ -93,5 +93,10 @@ body{
     border-color: #285e8e; /*set the color you want here*/
 }
 
+.form-control{
+    height: 30px !important;
+}
+
+
 
 

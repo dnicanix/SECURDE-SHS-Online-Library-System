@@ -25,7 +25,6 @@
 
 .addaymodal-container input[type=text], input[type=password] {
   height: 30px;
-  font-size: 15px;
   width: 100%;
   /*margin-bottom: 10px;*/
   -webkit-appearance: none;
@@ -75,12 +74,19 @@
 } 
 
 #add-container input[type=text]{
-    height: 20px;
-  width: 180px;
+  height: 20px;
+  width: 100%;
   /*margin-top: 10px;*/
-  font-size: 14px;
 }
 
 #label_title{
     text-align: left;
+}
+
+.form-control{
+    height: 30px !important;
+}
+
+#input_searchinput{
+    height: auto !important;   
 }

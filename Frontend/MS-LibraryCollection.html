@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>DLSU-SHS Online Library System</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gudea:400,400i,700|Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
+    <link href="css/sidenavbar.css" rel="stylesheet">
+    <link href="css/modal.css" rel="stylesheet">
+    <link href="css/ms-librarycollection.css" rel="stylesheet">
+    <link href="css/bootstrap-tagsinput.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+  </head>
+  <body class = "body_home">
+    <!-- Overlay for fixed sidebar -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Material sidebar -->
+    <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
+        <!-- Sidebar header -->
+        <div class="sidebar-header header-cover">
+            <!-- Sidebar brand image -->
+             <a href = "#" title = "Logout"><img src = "img/ic_logout.png" style = "float:right;margin-top:10px;margin-right:10px;" width = "30" height = "30"></a>
+            <center>
+                <div class="sidebar-image">
+                    <img src="img/ic_librarian.png" class = "img-rounded">
+                </div>
+            </center>
+            <!-- Sidebar brand name -->
+            <div class="sidebar-brand">
+                Dianne Agustin  <p style = "margin-top:-30px;font-size:12px;">Library Manager</p>
+            </div>
+        </div>
+
+        <!-- Sidebar navigation -->
+        <ul class="nav sidebar-nav">
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <img src = "img/ic_myaccount.png" class = "img_icons"/>
+                    My Account
+                </a>
+            </li>
+            <li class = "active">
+                <a href="#">
+                    <img src = "img/ic_librarycollection.png" class = "img_icons"/>
+                    Library Collection
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src = "img/ic_meetingrooms.png" class = "img_icons"/>
+                    Meeting Rooms
+                </a>
+            </li>
+        </ul>
+        <!-- Sidebar divider -->
+        <!-- <div class="sidebar-divider"></div> -->
+
+        <!-- Sidebar text -->
+        <!--  <div class="sidebar-text">Text</div> -->
+    </aside>
+    
+    <div class="wrapper">
+        <center>
+            <div class="jumbotron">
+                <h3> <img src="img/ic_dlsu.png" width = 80; height = 80; style = "margin-right:10px;"/>DLSU Senior High School (SHS) Online Library</h3>      
+            </div>
+        </center>   
+        <!-- Sidebar Constructor -->
+        <div class="constructor">
+            <div class = "row">
+                <p class="pageheader"> <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> 
+                    Library Collection 
+                    <button id = "button_add" type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal_add">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </p>
+            </div>
+            <div class = "row">
+                <div class = "col-md-3" style = "float:left;">
+                    <select class="selectpicker show-tick" data-width="250">  
+                     <option selected>All</option>
+                     <option>Filter by Books</option>
+                     <option>Filter by Thesis</option>
+                     <option>Filter by Magazines</option>
+                    </select>
+                </div>
+                <div class = "col-md-9" style = "float:right;">
+                    <form role="search" class = "form-horizontal">
+                        <div class="input-group col-md-4" style = "float:right;">
+                            <input id = "input_searchinput" type="text" class="form-control" placeholder="Type your search here...">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                        <div class = "input-group col-md-4" style = "float:right;"><label style = "margin-top:5px;margin-left:40px;">Search by:</label>
+                            <select class="selectpicker show-tick" data-width="auto">
+                             <option>Title</option>
+                             <option>Author</option>
+                             <option>Publisher</option>
+                            </select>
+                        </div>
+                    </form>
+                </div> 
+            
+            </div>
+            <div class = "row">
+                <p id = "p_resultscount"> ----- Showing 50 results -----</p>     
+            </div>
+
+            <!-- L I B R A R Y   C O L L E C T I O N -->
+            <div id = "div_readingmaterial" class = "row">
+                <div class = "col-md-1"> <p class = "p_number">1</p> </div>
+                <div id = "div_readingmaterialdetails" class = "col-md-11">
+                     <p id = "title"> <a href = "#"> Generating Life Stories through Facebook Posts </a>
+                         <button id = "button_reserve" type="button" class="btn btn-primary" data-toggle = "modal" data-target = ".modal_editreading">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> EDIT
+                         </button>
+                     </p>
+                     
+                     <br>
+                    <div class = "row">
+                         <div class = "col-md-1 col_1">
+                            <img src=img/ic_thesis.png class = "indent" width = "80" height = "80">
+                         </div>
+                         <div class = "col-md-11 col_11">
+                            <p class = "indent">
+                                <button id = "button_review" type="button" class="btn btn-danger" data-toggle = "modal" data-target = ".modal_delete">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> DELETE
+                                </button>
+                                <label id = "author">Sevilla, Danica </label> -
+                                <label id = "publisher">New York Publisher</label> - 
+                                <label id = "year">2017</label><br>
+                                <label id = "location">601</label><br>
+                                <label id = "available"> AVAILABLE </label>
+                            </p>
+
+                         </div>
+                    </div>
+                    <div class = "row">
+                        <div class = col-md-1 col_1>
+                            <p class = "indent"></p>
+                        </div>
+                        <div class = col-md-11 col_11>
+                            <p class = "indent">
+                            Tags: <label id = "tags"> NLP, Life Events, Social Media, Facebook, Story Generation</label>
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id = "div_readingmaterial" class = "row">
+                <div class = "col-md-1"> <p class = "p_number">1</p> </div>
+                <div id = "div_readingmaterialdetails" class = "col-md-11">
+                     <p id = "title"> <a href = "#"> Generating Life Stories through Facebook Posts </a>
+                         <button id = "button_reserve" type="button" class="btn btn-primary" data-toggle = "modal" data-target = ".modal_editreading">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> EDIT
+                         </button>
+                     </p>
+                     
+                     <br>
+                    <div class = "row">
+                         <div class = "col-md-1 col_1">
+                            <img src=img/ic_magazine.png class = "indent" width = "80" height = "80">
+                         </div>
+                         <div class = "col-md-11 col_11">
+                            <p class = "indent">
+                                <button id = "button_review" type="button" class="btn btn-danger" data-toggle = "modal" data-target = ".modal_delete">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> DELETE
+                                </button>
+                                <label id = "author">Sevilla, Danica </label> -
+                                <label id = "publisher">New York Publisher</label> - 
+                                <label id = "year">2017</label><br>
+                                <label id = "location">601</label><br>
+                                <label id = "reserved"> OUT - 07/14/21 - 07/15/21 </label>
+                            </p>
+
+                         </div>
+                    </div>
+                    <div class = "row">
+                        <div class = col-md-1 col_1>
+                            <p class = "indent"></p>
+                        </div>
+                        <div class = col-md-11 col_11>
+                            <p class = "indent">
+                            Tags: <label id = "tags"> NLP, Life Events, Social Media, Facebook, Story Generation</label>
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+      
+      
+      
+    <!-- DELETE MODAL -->
+     <div class="modal fade modal_delete" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="addaymodal-container" id="delete-container">
+            <center>
+                <form id = "form_deletereading" class="form form-horizontal" action="" method="POST" style = "margin-bottom:70px;" >
+                    Are you sure you want to delete this reading material?
+                    <div class="text-center" style = "margin-top: 30px;">
+                        <button id="button_confirmdelete" type="button" class="btn btn-success col-xs-4 submit" style="margin-left:40px; margin-right:30px;font-size:14px;"> <i class="glyphicon glyphicon-th-list"></i> YES </button>
+
+                        <button type="button" class="btn btn-danger col-xs-4 cancel" data-dismiss="modal" style=" margin-left: 20px;font-size:14px;"> <i class="glyphicon glyphicon-remove"></i> CANCEL </button>
+
+                    </div>
+                </form>
+            </center>
+            
+        </div>
+       </div>
+      </div>
+    
+    <!-- ADD MODAL -->
+     <div class="modal fade modal_add" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="addaymodal-container" id="addreading-container">
+            <center>
+              <form id = "form_addreading" class="form form-horizontal" action="" method="POST">
+                <fieldset>
+                  <legend style="margin-bottom:-10px;"></legend>
+                  <h3><legend class="text-center"><b>ADD READING</b></legend></h3>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Title</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_title">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Type</label>
+                           <div class="col-sm-8">
+                            <select class="selectpicker show-tick" data-width="250" style = "height:25px;">
+                             <option value = "1">Book</option>
+                             <option value = "2">Thesis</option>
+                             <option value = "3">Magazine</option>
+                            </select>
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Author</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_author" data-role="tagsinput">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Publisher</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_publisher">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Year</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="number" class="form-control" id="input_year"
+                                       min="1900" max="2017" step="1" value="2017">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Location</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_location">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Tags</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_tags" data-role="tagsinput">
+                           </div>
+                   </div>
+                   <br>
+                  <div class="text-center">
+                    <button id="button_addreading" type="submit" class="btn btn-success col-xs-4 submit" style="margin-left:40px; margin-right:30px;font-size:14px;"> <i class="glyphicon glyphicon-th-ok"></i> ADD </button>
+
+                    <button type="button" class="btn btn-danger col-xs-4 cancel" data-dismiss="modal" style="
+                      margin-left: 20px;font-size:14px;"> <i class="glyphicon glyphicon-remove"></i> CANCEL </button>
+                  </div>
+
+                </fieldset>
+              </form>
+          </center>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL -->
+     <div class="modal fade modal_editreading" id="modal_editreading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="addaymodal-container" id="editreading-container">
+            <center>
+              <form id = "form_editreading" class="form form-horizontal" action="" method="POST">
+                <fieldset>
+                  <legend style="margin-bottom:-10px;"></legend>
+                  <h3><legend class="text-center"><b>EDIT READING</b></legend></h3>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Title</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_edittitle"
+                                      value="Hello World">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Type</label>
+                           <div class="col-sm-8">
+                            <select class="selectpicker show-tick" data-width="250" style = "height:25px;" value="Magazine">
+                             <option value = "1">Book</option>
+                             <option value = "2">Thesis</option>
+                             <option value = "3">Magazine</option>
+                            </select>
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Author</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_editauthor" data-role="tagsinput"
+                                      value="Danica, Wah, Heh, Hi">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Publisher</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_editpublisher" value="Publisher">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Year</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="number" class="form-control" id="input_edityear"
+                                       min="1900" max="2017" step="1" value="2017">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Location</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_editlocation"
+                                      value="133">
+                           </div>
+                   </div>
+                  <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Tags</label>
+                           <div class="col-sm-8">
+                               <input name = "readingtitle" type="text" class="form-control" id="input_edittags" data-role="tagsinput"
+                                      value="joy,sad,angry,disgust">
+                           </div>
+                   </div>
+                   <br>
+                  <div class="text-center">
+                    <button id="button_addreading" type="submit" class="btn btn-success col-xs-4 submit" style="margin-left:40px; margin-right:30px;font-size:14px;"> <i class="glyphicon glyphicon-th-ok"></i> SAVE </button>
+
+                    <button type="button" class="btn btn-danger col-xs-4 cancel" data-dismiss="modal" style="
+                      margin-left: 20px;font-size:14px;"> <i class="glyphicon glyphicon-remove"></i> CANCEL </button>
+                  </div>
+
+                </fieldset>
+              </form>
+          </center>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/sidenavbar.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-tagsinput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#form_addreading").submit(function() {
+                var authors = $("#input_author").val();
+                var tags = $("#input_tags").val();
+                alert("Authors" + authors + "/nTags" + tags);
+                return false;
+            });
+        
+            $("#form_editreading").submit(function() {
+                var authors = $("#input_editauthor").val();
+                var tags = $("#input_edittags").val();
+                alert("Authors" + authors + "/nTags" + tags);
+                return false;
+            });
+        });
+       
+    </script>
+
+  </body>
+  
+</html>
