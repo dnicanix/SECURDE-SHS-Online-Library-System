@@ -48,6 +48,8 @@ fieldset.fieldset_reviews {
     /* to center elements inside*/
     margin:auto; !important
     width: 1000px; !important;
+    
+    margin-bottom: 30px;
 }
 
 legend.fieldset_reviews {
@@ -62,12 +64,16 @@ legend.fieldset_reviews {
     margin-top:30px;
 }
 
-#label_reviewer{
-    font-weight: 700;
-}
-
 #label_reviewdate{
     font-style: italic;
     font-size: 12px;
     float: right;
+}
+
+.sidebar-default .sidebar-nav li:hover > a, .sidebar-default .sidebar-nav li > a:hover{
+    background:#B2CFBB;
+}
+
+.sidebar .sidebar-nav li a:hover{
+    background:#B2CFBB;
 }

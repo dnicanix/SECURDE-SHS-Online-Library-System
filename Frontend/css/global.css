@@ -51,14 +51,6 @@ input{
     margin-right:20px;
 }
 
-}
-
-#img_studentreview{
-    border-style: solid;
-    border-width: 1px;
-    border-color: #95989A;
-}
-
 .img_facultyreview{
     
 }
@@ -78,6 +70,12 @@ input{
 }
 
 .img-rounded{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95989A;
+}
+
+.img-circle{
     border-style: solid;
     border-width: 1px;
     border-color: #95989A;
@@ -118,6 +116,11 @@ input{
 .pageheader{
     font-size: 16px;
     font-weight: 600; /* semi-bold */
+}
+
+hr.style1{
+	border-top: 1px solid #8c8b8b;
+    width: 570px;
 }
 
 hr.style8 {
