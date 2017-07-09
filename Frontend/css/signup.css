@@ -32,7 +32,6 @@ body{
     margin:auto;
 
     /*this to solve "the content will not be cut when the window is smaller than the content": */
-    overflow:auto;
 }
 
 #ic_archer{
@@ -93,6 +92,11 @@ body{
     background-color: #FFFFF;
     border-color: #285e8e; /*set the color you want here*/
 }
+
+.form-control{
+    height: 30px !important;
+}
+
 
 
 

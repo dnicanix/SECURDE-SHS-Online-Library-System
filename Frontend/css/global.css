@@ -44,10 +44,11 @@ input{
     margin-right:20px;
 }
 
-#img_studentreview{
-    border-style: solid;
-    border-width: 1px;
-    border-color: #95989A;
+.img_ic_review{
+    width:16px;
+    height:16px;
+    margin-left:20px;
+    margin-right:20px;
 }
 
 .img_facultyreview{
@@ -56,17 +57,42 @@ input{
 
 .jumbotron{
     margin-top:-20px;   
-    margin-left:-50px;
-    margin-right:-50px;
-    background-color: #E4E4E4;
+    background-color:floralwhite;
     padding-top: 0px;
     padding-bottom:0px;
     background-size: cover;
     background: contain;
     height: 80px; /* define the height in pixels or make sure   */
                    /* you have something in your div with height */
-                   /* so you can see your image */
+                   /* so you ca;n see your image */
+    background-image: url("../img/bg_header.jpg");
+    background-position: center; 
 }
+
+.img-rounded{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95989A;
+}
+
+.img-circle{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95989A;
+}
+
+.tooltip-inner {
+    min-width: 200px;
+    max-width: 100%; 
+}
+
+#p_resultscount{
+    font-style:italic;
+    margin-left:15px;
+    margin-top:20px;
+    margin-bottom:-10px;
+}
+
 
 #table_meetingrooms>tbody>tr>td{
     padding:10px;
@@ -100,11 +126,17 @@ input{
     font-weight: 600; /* semi-bold */
 }
 
+hr.style1{
+	border-top: 1px solid #8c8b8b;
+    width: 570px;
+}
+
 hr.style8 {
     margin-top:-10px;
 	border-top: 1px solid #8c8b8b;
 	border-bottom: 1px solid #fff;
 }
+
 hr.style8:after {
 	content: '';
 	display: block;
@@ -112,3 +144,4 @@ hr.style8:after {
 	border-top: 1px solid #8c8b8b;
 	border-bottom: 1px solid #fff;
 }
+

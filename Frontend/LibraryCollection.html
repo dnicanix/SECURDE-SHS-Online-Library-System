@@ -24,14 +24,15 @@
         <!-- Sidebar header -->
         <div class="sidebar-header header-cover">
             <!-- Sidebar brand image -->
+            <a href = "#" title = "Logout"><img src = "img/ic_logout.png" style = "float:right;margin-top:10px;margin-right:10px;" width = "30" height = "30"></a>
             <center>
                 <div class="sidebar-image">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53474/atom_profile_01.jpg">
+                    <img src="img/ic_student.png" class = "img-rounded">
                 </div>
             </center>
             <!-- Sidebar brand name -->
             <div class="sidebar-brand">
-                Danica Sevilla
+                Danica Sevilla  <p style = "margin-top:-30px;font-size:12px;">Student</p>
             </div>
         </div>
 
@@ -66,31 +67,34 @@
     
     <div class="wrapper">
         <!-- Sidebar Constructor -->
+        <center>
+            <div class="jumbotron">
+                <h3> <img src="img/ic_dlsu.png" width = 80; height = 80; style = "margin-right:10px;"/>DLSU Senior High School (SHS) Online Library</h3>      
+            </div>
+        </center>        
         <div class="constructor">
-            <center>
-                <div class="jumbotron">
-                    <h3> <img src="img/ic_dlsu.png" width = 80; height = 80; style = "margin-right:10px;"/>DLSU Senior High School (SHS) Online Library</h3>      
-                </div>
-            </center>
+
             <div class = "row">
-                <p class="pageheader">> Library Collection</p>
+                <p class="pageheader"> <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Library Collection</p>
             </div>
             <div class = "row">
-                <div class = "col-md-2" style = "float:left;">
-                    <select class="selectpicker show-tick" data-width="250">
-                     <option>Sort by A-Z</option>
-                     <option selected>Sort by Z-A</option>
+                <div class = "col-md-3" style = "float:left;">
+                    <select class="selectpicker show-tick" data-width="250">  
+                     <option selected>All</option>
+                     <option>Filter by Books</option>
+                     <option>Filter by Thesis</option>
+                     <option>Filter by Magazines</option>
                     </select>
                 </div>
                 <div class = "col-md-9" style = "float:right;">
                     <form role="search" class = "form-horizontal">
-                        <div class="input-group col-md-3" style = "float:right;">
+                        <div class="input-group col-md-4" style = "float:right;">
                             <input type="text" class="form-control" placeholder="Type your search here..." name="q">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                             </div>
                         </div>
-                        <div class = "input-group col-md-3" style = "float:right;"><label style = "margin-top:5px;">Search by:</label>
+                        <div class = "input-group col-md-4" style = "float:right;"><label style = "margin-top:5px;margin-left:40px;">Search by:</label>
                             <select class="selectpicker show-tick" data-width="auto">
                              <option>Title</option>
                              <option>Author</option>
@@ -111,23 +115,29 @@
                 <!--<div class = "col-md-2" style = "float:right;"></div>-->
             
             </div>
-            
+            <div class = "row">
+                <p id = "p_resultscount"> ----- Showing 50 results -----</p>
+            </div>
             <!--- L I B R A R Y   C O L L E C T I O N --->
             <div id = "div_readingmaterial" class = "row">
                 <div class = "col-md-1"> <p class = "p_number">1</p> </div>
                 <div id = "div_readingmaterialdetails" class = "col-md-11">
                      <p id = "title"> <a href = "#"> Generating Life Stories through Facebook Posts </a>
-                         <button id = "button_reserve" type="button" class="btn btn-default">RESERVE</button>
+                         <button id = "button_reserve" type="button" class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> RESERVE
+                         </button>
                      </p>
                      
                      <br>
                     <div class = "row">
                          <div class = "col-md-1 col_1">
-                            <img src=img/ic_book.png class = "indent" width = "80" height = "80">
+                            <img src=img/ic_thesis.png class = "indent" width = "80" height = "80">
                          </div>
                          <div class = "col-md-11 col_11">
                             <p class = "indent">
-                                <button id = "button_review" type="button" class="btn btn-default">REVIEW</button>
+                                <button id = "button_review" type="button" class="btn btn-primary btn-sm" >
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> REVIEW
+                                </button>
                                 <label id = "author">Sevilla, Danica </label> -
                                 <label id = "publisher">New York Publisher</label> - 
                                 <label id = "year">2017</label><br>
@@ -154,7 +164,9 @@
                 <div class = "col-md-1"> <p class = "p_number">2</p> </div>
                 <div id = "div_readingmaterialdetails" class = "col-md-11">
                      <p id = "title"> <a href = "#"> The Art of Procrastination </a>
-                         <button id = "button_reserve" type="button" class="btn btn-default" disabled="disabled">RESERVE</button>
+                         <button id = "button_reserve" type="button" class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> UNRESERVE
+                         </button>
                      </p>
                      
                      <br>
@@ -164,7 +176,9 @@
                          </div>
                          <div class = "col-md-11 col_11">
                             <p class = "indent">
-                                <button id = "button_review" type="button" class="btn btn-default" disabled="disabled">REVIEW</button>
+                                <button id = "button_review" type="button" class="btn btn-primary btn-sm" disabled="disabled">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>REVIEW
+                                </button>
                                 <label id = "author">Sprouse, Cole and Mendes, Camilla </label> -
                                 <label id = "publisher">New York Publisher</label> - 
                                 <label id = "year">2017</label><br>

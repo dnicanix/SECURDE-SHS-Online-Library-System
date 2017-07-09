@@ -41,12 +41,14 @@ th{
 }
 
 .well{
-    width:900px; 
+    width:100%; 
+    padding:10px;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 fieldset.fieldset_legend {
     border: groove !important;
-    border-color: rgba(149, 152, 154, 0.40) !important;
+    border-color: rgba(149, 152, 154, 0.5) !important;
     border-style: solid !important;
     border-width: 1px !important;
     padding: 0 1.4em 1.4em 1.4em !important;
@@ -54,7 +56,7 @@ fieldset.fieldset_legend {
             box-shadow:  0px 0px 0px 0px #000;
     font-size: 14px;
     
-    background: rgba(255, 255, 255, 0.40);
+    background: rgba(255, 255, 255, 0.5);
     /* to center elements inside*/
     margin:auto; !important
     width: 500px; !important;
@@ -83,5 +85,9 @@ legend.fieldset_legend {
     background-color: rgba(242,7,7,0.5);
     float:left;
     margin-right:5px;
+}
+
+a:focus, a:hover{
+    text-decoration: none;
 }
 
