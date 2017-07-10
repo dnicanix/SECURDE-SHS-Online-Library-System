@@ -99,10 +99,11 @@ input{
 }
 /*** Button Modifications ***/
 .btn-primary{
-    background-color: #63A771;
+    background-color: #829E86;
     border-color: #95989A;
 }
 
+/*** Button Primary ***/
 .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary,
 .btn-primary:hover, .btn-primary.focus, .btn-primary:focus{
     background-color: #003300; /* dark green */
@@ -118,6 +119,25 @@ input{
 
 .btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default, .btn-default.focus, .btn-default:focus, .btn-default:hover {
     background-color: #003300;
+    color:white;
+}
+
+/*** Button Danger***/
+.btn-danger.active, .btn-danger:active, .open>.dropdown-toggle.btn-danger,
+.btn-danger:hover, .btn-danger.focus, .btn-danger:focus{
+    background-color: #4c0000; /* dark red */
+}
+
+.btn-danger.active.focus, .btn-danger.active:focus, .btn-danger.active:hover, .btn-danger:active.focus, .btn-danger:active:focus, .btn-danger:active:hover, .open>.dropdown-toggle.btn-danger.focus, .open>.dropdown-toggle.btn-danger:focus, .open>.dropdown-toggle.btn-danger:hover{
+    background-color: #4c0000; /* dark red */
+}
+    
+.btn-danger:active:focus, .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open>.dropdown-toggle.btn-danger {
+    border-color: #95989A;
+}
+
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default, .btn-default.focus, .btn-default:focus, .btn-default:hover {
+    background-color: #829E86;
     color:white;
 }
 
