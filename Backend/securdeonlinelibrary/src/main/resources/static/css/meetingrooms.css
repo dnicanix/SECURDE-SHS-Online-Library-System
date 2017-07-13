@@ -1,0 +1,93 @@
+#table_meetingrooms{  
+    margin-top:10px;
+    background: rgba(255,255,255,0.50);
+    text-align: center;
+    padding: 10px;
+    font-size:12px;
+}
+
+th{
+    text-align: center;
+}
+
+#td_available{
+    font-weight: 800;
+    font-style: italic;
+    color:#297B3C;
+    background-color: rgba(41,123,60,0.5);
+    
+}
+
+#td_reserved{
+    font-weight: 800;
+    font-style: italic;
+    color:#F20707;
+    background-color: rgba(242,7,7,0.5);
+}
+
+#button_reserve, #button_cancel{
+    width: 150px;
+}
+
+.tr_empty{
+    height: 54.44px;
+}
+
+.a_available{
+    display:block;
+    width:inherit;  
+    height: inherit;
+    text-decoration: none;
+}
+
+.well{
+    width:100%; 
+    padding:10px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+fieldset.fieldset_legend {
+    border: groove !important;
+    border-color: rgba(149, 152, 154, 0.5) !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+    font-size: 14px;
+    
+    background: rgba(255, 255, 255, 0.5);
+    /* to center elements inside*/
+    margin:auto; !important
+    width: 500px; !important;
+    margin-bottom: 10px;
+}
+
+legend.fieldset_legend {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+    font-size: 14px;
+    text-align: left;
+}
+
+#div_availablelegend{
+    width: 40px;
+    height: 15px;
+    background-color: rgba(41,123,60,0.5);
+    float:left;
+    margin-right:5px;
+}
+
+#div_reservedlegend{
+    width: 40px;
+    height: 15px;
+    background-color: rgba(242,7,7,0.5);
+    float:left;
+    margin-right:5px;
+}
+
+a:focus, a:hover{
+    text-decoration: none;
+}
+

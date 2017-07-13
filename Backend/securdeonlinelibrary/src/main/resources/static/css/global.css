@@ -1,0 +1,147 @@
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    /* font-size: 14px; by default */
+    zoom: 0.8;
+}
+
+.body_home{
+    background-image: url("../img/bg_home.jpg");
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+    zoom: 0.90;
+    width:100%;
+}
+
+a{
+    color: black;
+}
+
+label{
+    font-weight:500;
+    font-size:14px;
+}
+
+input{
+    height: 30px;
+}
+
+.title{
+    font-size: 30px;
+    font-weight: 400; /* semi-bold */
+}
+
+.subtitle{
+    font-size: 20px;
+}
+
+.img_icons{
+    width:30px;
+    height:30px;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.img_ic_review{
+    width:16px;
+    height:16px;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.img_facultyreview{
+    
+}
+
+.jumbotron{
+    margin-top:-20px;   
+    background-color:floralwhite;
+    padding-top: 0px;
+    padding-bottom:0px;
+    background-size: cover;
+    background: contain;
+    height: 80px; /* define the height in pixels or make sure   */
+                   /* you have something in your div with height */
+                   /* so you ca;n see your image */
+    background-image: url("../img/bg_header.jpg");
+    background-position: center; 
+}
+
+.img-rounded{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95989A;
+}
+
+.img-circle{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95989A;
+}
+
+.tooltip-inner {
+    min-width: 200px;
+    max-width: 100%; 
+}
+
+#p_resultscount{
+    font-style:italic;
+    margin-left:15px;
+    margin-top:20px;
+    margin-bottom:-10px;
+}
+
+
+#table_meetingrooms>tbody>tr>td{
+    padding:10px;
+}
+/*** Button Modifications ***/
+.btn-primary{
+    background-color: #63A771;
+    border-color: #95989A;
+}
+
+.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary,
+.btn-primary:hover, .btn-primary.focus, .btn-primary:focus{
+    background-color: #003300; /* dark green */
+}
+
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover{
+    background-color: #003300; /* dark green */
+}
+    
+.btn-primary:active:focus, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    border-color: #95989A;
+}
+
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default, .btn-default.focus, .btn-default:focus, .btn-default:hover {
+    background-color: #003300;
+    color:white;
+}
+
+.pageheader{
+    font-size: 16px;
+    font-weight: 600; /* semi-bold */
+}
+
+hr.style1{
+	border-top: 1px solid #8c8b8b;
+    width: 570px;
+}
+
+hr.style8 {
+    margin-top:-10px;
+	border-top: 1px solid #8c8b8b;
+	border-bottom: 1px solid #fff;
+}
+
+hr.style8:after {
+	content: '';
+	display: block;
+	margin-top: 2px;
+	border-top: 1px solid #8c8b8b;
+	border-bottom: 1px solid #fff;
+}
+

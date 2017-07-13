@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.*;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
 import javax.persistence.Id;
@@ -42,7 +43,7 @@ public class User{
     @Column(name = "password")
     @Length(min = 8, message = "*Password must have at least 8 characters")
     @NotEmpty(message = "*Password is required")
-    @org.springframework.data.annotation.Transient
+    @Transient
     private String password;
 
     @Column(name = "emailaddress")
@@ -62,8 +63,11 @@ public class User{
     @NotEmpty(message = "*Secret Answer is required")
     private String secretanswer;
 
+    @Column(name = "active")
+    private int active;
+
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "userrole", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "userrole", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "roleid"))
     private Set<Role> roles;
 
     public int getUserid() {
@@ -152,6 +156,14 @@ public class User{
 
     public void setSecretanswer(String secretanswer) {
         this.secretanswer = secretanswer;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 
     public Set<Role> getRoles() {
