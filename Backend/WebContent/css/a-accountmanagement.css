@@ -1,0 +1,13 @@
+#button_addaccount{
+    float:right;
+    margin-bottom: 10px;
+    margin-right:25px;
+}
+
+#button_cancel{
+    float:right;
+}
+
+.thumbnail{
+    padding:20px;
+}

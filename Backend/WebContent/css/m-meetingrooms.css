@@ -1,0 +1,13 @@
+.well{
+    width:40%; 
+    padding:30px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+#label_title{
+    text-align: left;
+}
+
+#button_reserve, #button_cancel{
+    width:100px;
+}
