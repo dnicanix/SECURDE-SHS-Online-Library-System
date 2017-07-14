@@ -6,8 +6,10 @@ public class RegisteredUser {
 	public static final String TABLE_NAME = "users";
 	public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_IDNUM = "idnum";
+	public static final String COLUMN_ACTIVE = "active";
 	public static final String COLUMN_USERTYPE = "usertype";
 	public static final String COLUMN_LASTNAME = "firstname";
+	public static final String COLUMN_MIDDLEINITIAL = "middleinitial";
 	public static final String COLUMN_FIRSTNAME = "lastname";
 	public static final String COLUMN_USERNAME = "username";
 	public static final String COLUMN_PASSWORD = "password";
@@ -18,8 +20,10 @@ public class RegisteredUser {
 	
 	private int userid;
 	private String idnum;
+	private int active;
 	private int usertype;
 	private String firstname;
+	private String middleinitial;
 	private String lastname;
 	private String username;
 	private String password;
@@ -32,13 +36,16 @@ public class RegisteredUser {
 		
 	}
 	
-	public RegisteredUser(int userid, String idnum, int usertype, String firstname, String lastname, String username,
-			String password, String emailaddress, String birthday, String secretquestion, String secretanswer) {
+	
+	public RegisteredUser(String idnum, int active, int usertype, String firstname, String middleinitial,
+			String lastname, String username, String password, String emailaddress, String birthday,
+			String secretquestion, String secretanswer) {
 		super();
-		this.userid = userid;
 		this.idnum = idnum;
+		this.active = active;
 		this.usertype = usertype;
 		this.firstname = firstname;
+		this.middleinitial = middleinitial;
 		this.lastname = lastname;
 		this.username = username;
 		this.password = password;
@@ -64,6 +71,14 @@ public class RegisteredUser {
 		this.idnum = idnum;
 	}
 
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
 	public int getUsertype() {
 		return usertype;
 	}
@@ -78,6 +93,14 @@ public class RegisteredUser {
 
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
+	}
+
+	public String getMiddleinitial() {
+		return middleinitial;
+	}
+
+	public void setMiddleinitial(String middleinitial) {
+		this.middleinitial = middleinitial;
 	}
 
 	public String getLastname() {

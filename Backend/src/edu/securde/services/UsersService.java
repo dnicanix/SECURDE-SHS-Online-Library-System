@@ -11,17 +11,18 @@ import edu.securde.db.DBPool;
 public class UsersService {
 
 	public static void addUser(RegisteredUser user){
-		//INSERT INTO users(idnum, usertype, firstname, lastname, username, 
+		//INSERT INTO users(idnum, active, usertype, firstname, middleinitial, lastname, username, 
 		// password, emailaddress, birthday, secretquestion, secretanswer)
-		//VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+		//VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 		
 		String sql = "INSERT INTO " + RegisteredUser.TABLE_NAME + "("
-				+ RegisteredUser.COLUMN_IDNUM + ","
+				+ RegisteredUser.COLUMN_IDNUM + "," + RegisteredUser.COLUMN_ACTIVE + ","
 				+ RegisteredUser.COLUMN_USERTYPE + "," + RegisteredUser.COLUMN_FIRSTNAME + ","
+				+ RegisteredUser.COLUMN_MIDDLEINITIAL + ","
 				+ RegisteredUser.COLUMN_LASTNAME + "," + RegisteredUser.COLUMN_USERNAME + ","
 				+ RegisteredUser.COLUMN_PASSWORD + "," + RegisteredUser.COLUMN_EMAILADDRESS + ","
 				+ RegisteredUser.COLUMN_BIRTHDAY + "," + RegisteredUser.COLUMN_SECRETQUESTION + ","
-				+ RegisteredUser.COLUMN_SECRETANSWER + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ RegisteredUser.COLUMN_SECRETANSWER + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -29,15 +30,17 @@ public class UsersService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getIdnum());
-			pstmt.setInt(2, user.getUsertype());
-			pstmt.setString(3, user.getFirstname());
-			pstmt.setString(4, user.getLastname());
-			pstmt.setString(5, user.getUsername());
-			pstmt.setString(6, user.getPassword());
-			pstmt.setString(7, user.getEmailaddress());
-			pstmt.setString(8, user.getBirthday());
-			pstmt.setString(9, user.getSecretquestion());
-			pstmt.setString(10, user.getSecretanswer());
+			pstmt.setInt(2, user.getActive());
+			pstmt.setInt(3, user.getUsertype());
+			pstmt.setString(4, user.getFirstname());
+			pstmt.setString(5, user.getMiddleinitial());
+			pstmt.setString(6, user.getLastname());
+			pstmt.setString(7, user.getUsername());
+			pstmt.setString(8, user.getPassword());
+			pstmt.setString(9, user.getEmailaddress());
+			pstmt.setString(10, user.getBirthday());
+			pstmt.setString(11, user.getSecretquestion());
+			pstmt.setString(12, user.getSecretanswer());
 			
 			pstmt.executeUpdate();
 			System.out.println("User is added successfully in DB!!!");
@@ -54,7 +57,6 @@ public class UsersService {
 				e.printStackTrace();
 			}
 		}
-		
 		
 	}
 	
@@ -143,10 +145,11 @@ public class UsersService {
 			while(rs.next()){
 				user = new RegisteredUser();
 				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
-				user.setUsername(rs.getString(RegisteredUser.COLUMN_USERNAME));
 				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
+				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
+				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
 				user.setLastname(rs.getString(RegisteredUser.COLUMN_LASTNAME));
 				user.setUsername(rs.getString(RegisteredUser.COLUMN_USERNAME));
 				user.setPassword(rs.getString(RegisteredUser.COLUMN_PASSWORD));
@@ -178,6 +181,7 @@ public class UsersService {
 		
 		/** Get all new info of the user**/
 		String newLastName = user.getLastname();
+		String newMiddleInitial = user.getMiddleinitial();
 		String newFirstName = user.getFirstname();
 		String newEmail = user.getEmailaddress();
 		String newUsername = user.getUsername();
@@ -185,6 +189,7 @@ public class UsersService {
 		
 		String sql = "UPDATE "+ RegisteredUser.TABLE_NAME + " SET " + RegisteredUser.COLUMN_LASTNAME + "=?, " +
 					 RegisteredUser.COLUMN_FIRSTNAME + "=?, " +
+					 RegisteredUser.COLUMN_MIDDLEINITIAL + "=?, " +
 					 RegisteredUser.COLUMN_EMAILADDRESS + "=?, " + 
 					 RegisteredUser.COLUMN_USERNAME + "=?, " + 
 					 RegisteredUser.COLUMN_PASSWORD + "=?" + " WHERE " +
@@ -197,10 +202,11 @@ public class UsersService {
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, newLastName);
 			pstat.setString(2, newFirstName);
-			pstat.setString(3, newEmail);
-			pstat.setString(4, newUsername);
-			pstat.setString(5, newPassword);
-			pstat.setInt(9, user.getUserid());
+			pstat.setString(3, newMiddleInitial);
+			pstat.setString(4, newEmail);
+			pstat.setString(5, newUsername);
+			pstat.setString(6, newPassword);
+			pstat.setInt(7, user.getUserid());
 			
 			pstat.executeUpdate();
 			
@@ -240,10 +246,11 @@ public class UsersService {
 			while(rs.next()){
 				user = new RegisteredUser();
 				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
-				user.setUsername(rs.getString(RegisteredUser.COLUMN_USERNAME));
 				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
+				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
+				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
 				user.setLastname(rs.getString(RegisteredUser.COLUMN_LASTNAME));
 				user.setUsername(rs.getString(RegisteredUser.COLUMN_USERNAME));
 				user.setPassword(rs.getString(RegisteredUser.COLUMN_PASSWORD));
@@ -270,4 +277,177 @@ public class UsersService {
 
 		return user;
 	}
+	
+	public static String validateUserbyUsername(String username){
+		String password = "";
+		
+		String sql = "SELECT password FROM users where username = ?";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				password = rs.getString(RegisteredUser.COLUMN_PASSWORD);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			
+			try {
+				pstmt.close();
+				conn.close();
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return password;
+	}
+
+	public static boolean validateUsernameIDnum(String username_idnum){
+		boolean isValid = false;
+		int userid = 0;
+		
+		/*SELECT *
+		 * FROM users
+		 * WHERE username = ? OR idnum = ?
+		 */
+		
+		String sql = "SELECT " + RegisteredUser.COLUMN_USERID + " FROM " + RegisteredUser.TABLE_NAME + " WHERE " 
+				+ RegisteredUser.COLUMN_USERNAME + " = ? OR " + RegisteredUser.COLUMN_IDNUM + " = ?";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username_idnum);
+			pstmt.setString(2, username_idnum);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				userid = rs.getInt(RegisteredUser.COLUMN_USERID);
+			}
+			
+			if(userid != 0){
+				isValid = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				pstmt.close();
+				conn.close();
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return isValid;
+	}
+	
+	public static RegisteredUser getUserByUsernameIDnum(String username_idnum){
+		
+		/*SELECT *
+		 * FROM users
+		 * WHERE username = ? OR idnum = ?
+		 */
+		
+		RegisteredUser user = null;
+		
+		String sql = "SELECT * FROM " + RegisteredUser.TABLE_NAME + " WHERE " 
+				+ RegisteredUser.COLUMN_USERNAME + " = ? OR " + RegisteredUser.COLUMN_IDNUM + " = ?";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username_idnum);
+			pstmt.setString(2, username_idnum);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				user = new RegisteredUser();
+				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
+				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
+				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
+				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
+				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
+				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
+				user.setLastname(rs.getString(RegisteredUser.COLUMN_LASTNAME));
+				user.setUsername(rs.getString(RegisteredUser.COLUMN_USERNAME));
+				user.setPassword(rs.getString(RegisteredUser.COLUMN_PASSWORD));
+				user.setEmailaddress(rs.getString(RegisteredUser.COLUMN_EMAILADDRESS));
+				user.setBirthday(rs.getString(RegisteredUser.COLUMN_BIRTHDAY));
+				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETQUESTION));
+				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETANSWER));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				pstmt.close();
+				conn.close();
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return user;
+	}
+	
+	public static boolean updateActive(int userid, int active){
+		
+		boolean isUpdateSuccess = false;
+		
+		String sql = "UPDATE "+ RegisteredUser.TABLE_NAME + " SET " + RegisteredUser.COLUMN_ACTIVE 
+					+ "=?, WHERE " + RegisteredUser.COLUMN_USERID + "=? ";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstat = null;
+		
+		try {
+			pstat = conn.prepareStatement(sql);
+			pstat.setInt(1, userid);
+			pstat.setInt(2, active);
+			
+			pstat.executeUpdate();
+			
+			System.out.println("UPDATE IN DB::SUCCESS!");
+			isUpdateSuccess = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				pstat.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return isUpdateSuccess;
+	}
+
 }
