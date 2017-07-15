@@ -34,6 +34,7 @@ public class LogInServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
@@ -86,6 +87,7 @@ public class LogInServlet extends HttpServlet {
 				request.getRequestDispatcher("LibraryCollectionForStaffAndManagerServlet").forward(request, response);
 			}
 			*/
+			request.getRequestDispatcher("LibraryCollectionServlet").forward(request, response);
 		}
 		else{
 			System.out.println("Log-In::FAILED");

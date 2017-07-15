@@ -149,7 +149,7 @@ public class UsersService {
 				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
-				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
+				user.setMiddleinitial(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
 				user.setLastname(rs.getString(RegisteredUser.COLUMN_LASTNAME));
 				user.setUsername(rs.getString(RegisteredUser.COLUMN_USERNAME));
 				user.setPassword(rs.getString(RegisteredUser.COLUMN_PASSWORD));
