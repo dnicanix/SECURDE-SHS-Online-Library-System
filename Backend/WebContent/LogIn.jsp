@@ -45,7 +45,7 @@
                    </form>
                    
                    <div id = "div_forgotpass_signup">
-                       <a href = "#">Forgot Password?</a> || <a href = "SignUp.jsp">Sign Up</a>
+                       <a href = "ForgotPassword.jsp">Forgot Password?</a> || <a href = "SignUp.jsp">Sign Up</a>
                    </div>
                </div>
            </div>
