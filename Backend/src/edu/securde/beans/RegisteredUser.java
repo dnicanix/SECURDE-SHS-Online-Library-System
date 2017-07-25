@@ -8,9 +8,9 @@ public class RegisteredUser {
 	public static final String COLUMN_IDNUM = "idnum";
 	public static final String COLUMN_ACTIVE = "active";
 	public static final String COLUMN_USERTYPE = "usertype";
-	public static final String COLUMN_LASTNAME = "firstname";
+	public static final String COLUMN_FIRSTNAME = "firstname";
 	public static final String COLUMN_MIDDLEINITIAL = "middleinitial";
-	public static final String COLUMN_FIRSTNAME = "lastname";
+	public static final String COLUMN_LASTNAME = "lastname";
 	public static final String COLUMN_USERNAME = "username";
 	public static final String COLUMN_PASSWORD = "password";
 	public static final String COLUMN_EMAILADDRESS = "emailaddress";

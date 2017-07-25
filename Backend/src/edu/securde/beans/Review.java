@@ -16,6 +16,13 @@ public class Review {
 	public Review(){
 		
 	}
+	
+	public Review(int readingid, int userid, String review) {
+		super();
+		this.readingid = readingid;
+		this.userid = userid;
+		this.review = review;
+	}
 
 	public Review(int readingid, int userid, String review, String reviewdate) {
 		super();

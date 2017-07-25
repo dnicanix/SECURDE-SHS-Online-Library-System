@@ -3,26 +3,31 @@ package edu.securde.beans;
 public class ReviewInfo {
 	
 	private int readingid;
-	private int userid;
 	private String readingtitle;
+	private int userid;
+	private String username;
+	private String usertype;
 	private String userfullname;
 	private String review;
 	private String reviewdate;
 	
 	public ReviewInfo(){
 		
-	}
+	}	
 
-	public ReviewInfo(int readingid, int userid, String readingtitle, String userfullname, String review,
-			String reviewdate) {
+	public ReviewInfo(int readingid, String readingtitle, int userid, String username, String usertype,
+			String userfullname, String review, String reviewdate) {
 		super();
 		this.readingid = readingid;
-		this.userid = userid;
 		this.readingtitle = readingtitle;
+		this.userid = userid;
+		this.username = username;
+		this.usertype = usertype;
 		this.userfullname = userfullname;
 		this.review = review;
 		this.reviewdate = reviewdate;
 	}
+
 
 	public int getReadingid() {
 		return readingid;
@@ -72,4 +77,20 @@ public class ReviewInfo {
 		this.reviewdate = reviewdate;
 	}
 
-}
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
+	}
+
+ }

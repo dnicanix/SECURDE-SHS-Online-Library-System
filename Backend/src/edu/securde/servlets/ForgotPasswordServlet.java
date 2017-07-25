@@ -47,13 +47,27 @@ public class ForgotPasswordServlet extends HttpServlet{
 		
 		HttpSession session = request.getSession();
 		
+		RegisteredUser user;
+		
 		//put the user's info into session's attributes
-		RegisteredUser user = UsersService.getUserByUsernameID(username_idnumber);
+		if(username_idnumber != null){
+			user = UsersService.getUserByUsernameID(username_idnumber);
+		}
+		else{
+			int userid = (int) session.getAttribute("userid");
+			user = UsersService.getUser(userid);
+			if(userid != 0){
+				request.setAttribute("securityquestion", user.getSecretquestion());
+				request.getRequestDispatcher("SecurityQuestion.jsp").forward(request, response);
+			}
+		}
 		session.setAttribute(RegisteredUser.COLUMN_USERNAME, user.getUsername());
+		session.setAttribute(RegisteredUser.COLUMN_USERTYPE, user.getUsertype());
 		session.setAttribute(RegisteredUser.COLUMN_USERID, user.getUserid());
 		
 		if(UsersService.validateUsernameIDnum(username_idnumber)){
-			request.getRequestDispatcher("NewPassword.jsp").forward(request, response);
+			request.setAttribute("securityquestion", user.getSecretquestion());
+			request.getRequestDispatcher("SecurityQuestion.jsp").forward(request, response);
 			System.out.println("VALID USERNAME");
 		}
 	}

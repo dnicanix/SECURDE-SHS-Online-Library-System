@@ -24,7 +24,7 @@
            
            <div class = "row">
                <p class = "subtitle" style="margin-left:10px">
-                   <a title="Back to Log In page" href="LogIn.html">
+                   <a title="Back to Log In page" href="LogIn.jsp">
                       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                    </a>
 

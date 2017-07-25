@@ -3,29 +3,36 @@ package edu.securde.beans;
 public class ReservedRoom {
 
 	public static final String TABLE_NAME = "reserved_rooms";
+	public static final String COLUMN_RESERVEDROOMID = "reservedroomid";
 	public static final String COLUMN_ROOMID = "roomid";
-	public static final String COLUMN_USERID = "userd";
+	public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_DATE = "date";
-	public static final String COLUMN_STARTTIME = "starttime";
-	public static final String COLUMN_ENDTIME = "endtime";
+	public static final String COLUMN_TIMESLOTID = "timeslotid";
 	
+	private int reservedroomid;
 	private int roomid;
 	private int userid;
 	private String date;
-	private String starttime;
-	private String endtime;
+	private int timeslotid;
 	
 	public ReservedRoom(){
 		
 	}
 
-	public ReservedRoom(int roomid, int userid, String date, String starttime, String endtime) {
+	public ReservedRoom(int roomid, int userid, String date, int timeslotid) {
 		super();
 		this.roomid = roomid;
 		this.userid = userid;
 		this.date = date;
-		this.starttime = starttime;
-		this.endtime = endtime;
+		this.timeslotid = timeslotid;
+	}
+
+	public int getReservedroomid() {
+		return reservedroomid;
+	}
+
+	public void setReservedroomid(int reservedroomid) {
+		this.reservedroomid = reservedroomid;
 	}
 
 	public int getRoomid() {
@@ -52,20 +59,13 @@ public class ReservedRoom {
 		this.date = date;
 	}
 
-	public String getStarttime() {
-		return starttime;
+	public int getTimeslotid() {
+		return timeslotid;
 	}
 
-	public void setStarttime(String starttime) {
-		this.starttime = starttime;
+	public void setTimeslotid(int timeslotid) {
+		this.timeslotid = timeslotid;
 	}
 
-	public String getEndtime() {
-		return endtime;
-	}
-
-	public void setEndtime(String endtime) {
-		this.endtime = endtime;
-	}
 	
 }

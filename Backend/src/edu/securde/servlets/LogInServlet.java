@@ -79,6 +79,9 @@ public class LogInServlet extends HttpServlet {
 				session.setAttribute(RegisteredUser.COLUMN_USERID, user.getUserid());
 			}
 			System.out.println("Log-In::SUCCESS");
+			
+			request.getRequestDispatcher("LibraryCollection").forward(request, response);
+			
 			/*
 			if(user.getUsertype() == 1 || user.getUsertype() == 2){
 				request.getRequestDispatcher("LibraryCollectionServlet").forward(request, response);

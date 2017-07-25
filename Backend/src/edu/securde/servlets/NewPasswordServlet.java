@@ -3,6 +3,7 @@ package edu.securde.servlets;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +59,15 @@ public class NewPasswordServlet extends HttpServlet {
 						if(UsersService.changePassword(userid, AESencrp.encrypt(newpassword))){
 							System.out.println("Change Password Success!");
 							System.out.println("Password: " + AESencrp.decrypt(user.getPassword()));
+							
+							Cookie usernameCookie = new Cookie("username", user.getUsername());
+							usernameCookie.setMaxAge(60*60*24);
+							usernameCookie.setHttpOnly(true);
+							response.addCookie(usernameCookie);
+							
+							System.out.println("Log-In::SUCCESS");
+							
+							request.getRequestDispatcher("LibraryCollection").forward(request, response);;
 						}
 						else{
 							System.out.println("Change Password failed!");

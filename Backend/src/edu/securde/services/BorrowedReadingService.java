@@ -248,4 +248,37 @@ public class BorrowedReadingService {
 	//get all CURRENTLY RESERVED readings of a user
 	
 	//get borrowed reading history of a book
+	
+	public static boolean checkIfBorrowedBytheUser(int userid, int readingid){
+		boolean isBorrowedByUser = false;
+		int borrowedreadingid = 0;
+		
+		/*SELECT borrowedreadingid
+		FROM borrowed_readings
+		WHERE readingid = ? AND userid = ?*/
+		
+		String sql = "SELECT " + BorrowedReading.COLUMN_BORROWEDREADINGID + " FROM " + BorrowedReading.TABLE_NAME
+				+ " WHERE " + BorrowedReading.COLUMN_READINGID + " = ? AND " + BorrowedReading.COLUMN_USERID + " = ?";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, readingid);
+			pstmt.setInt(2, userid);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				borrowedreadingid = 0;
+				isBorrowedByUser = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return isBorrowedByUser;
+ 	}
 }
