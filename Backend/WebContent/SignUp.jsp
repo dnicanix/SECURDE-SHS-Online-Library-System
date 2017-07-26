@@ -32,7 +32,12 @@
                    <img id = "ic_archer" src = "img/ic_archer.png" width = "208" height = "187">
                </div>
                <div class = "col-md-7">
-                   <form id = "form_signup" class = "form-horizontal" action = "SignUpServlet" method = "POST">
+                   <form id = "form_signup" class = "form-horizontal" action = "SignUp" method = "POST">
+	                    <c:if test ="${errorMessage != null}">
+		                    <center>
+		                   		<label style="color:red;">${errorMessage}</label>
+		                   	</center>
+	                   	</c:if>                    	
                        <div class="form-group">
                             <label class="col-sm-3 control-label" id = "label_name">Name</label>
                             <div class="col-sm-9">
@@ -65,22 +70,29 @@
                             <label class="col-sm-3 control-label" id = "label_username">Username</label>
                             <div class="col-sm-9">
                               <input name = "username" type="text" class="form-control" id="input_username" data-toggle="tooltip" data-placement="right"
-                                      title="Username must be chuchuchu." required="true">
+                                      title="Username must be unique." required="true">
                             </div>
                         </div>
                        <div class="form-group">
                             <label class="col-sm-3 control-label" id = "label_password" required = "true">Password</label>
                             <div class="col-sm-9">
                               <input name = "password" type="password" class="form-control" id="input_password" data-toggle="tooltip" data-placement="right"
-                                      title="Password must be chuchuchuc." required="true">
+                                     minlength = "8" maxlength = "20" title="Password must be atleast 8 characters with
+                                      		 1 uppercase letter, 1 number and 1 special character." required="true">
                             </div>
                        </div>
                        <div class="form-group">
                             <label class="col-sm-3 control-label" id = "label_confirmpassword"></label>
                             <div class="col-sm-7">
                               <input name = "confirmpassword" type="password" class="form-control" id="input_confirmpassword" placeholder="Re-enter password"
-                              required="true">          
+                              		 onkeyup = "checkPass(); return false;" required="true">          
                             </div>
+                       </div>
+                       <div class = "form-group">
+                       		<div class ="col-sm-3"></div>
+                       		<div class ="col-sm-7">
+                       		<span id="confirmMessage" style = "margin-top:-10px;"></span>
+                       		</div>
                        </div>
                        <div class="form-group">
                             <label class="col-sm-3 control-label" id = "label_email">Email Add.</label>
@@ -132,6 +144,39 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
+    
+    <script>
+		function checkPass()
+		{
+		    //Store the password field objects into variables ...
+		    var pass1 = document.getElementById('input_password');
+		    var pass2 = document.getElementById('input_confirmpassword');
+		    //Store the Confimation Message Object ...
+		    var message = document.getElementById('confirmMessage');
+		    //Set the colors we will be using ...
+		    var goodColor = "transparent";
+		    var badColor = "red";
+		    //Compare the values in the password field 
+		    //and the confirmation field
+		    if(pass1.value == pass2.value){
+		        //The passwords match. 
+		        //Set the color to the good color and inform
+		        //the user that they have entered the correct password 
+		        //pass2.style.backgroundColor = goodColor;
+		        message.style.color = "green";
+		        message.innerHTML = "Passwords Match!";
+		        document.getElementById("btn_signup").disabled = false;
+		    }else{
+		        //The passwords do not match.
+		        //Set the color to the bad color and
+		        //notify the user.
+		        //pass2.style.backgroundColor = goodColor;
+		        message.style.color = badColor;
+		        message.innerHTML = "Passwords Do Not Match!";
+		        document.getElementById("btn_signup").disabled = true;
+		    }
+		}  
+	</script>
 
   </body>
   

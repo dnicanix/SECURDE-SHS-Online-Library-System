@@ -30,15 +30,6 @@
     font-style: italic;
 }
 
-#button_edit, #button_delete{
-    float:right;
-    width: 150px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    margin-right: 3px;
-    margin-left: 3px;
-}
-
 #button_add{
     float:right;
     width: 150px;
@@ -63,6 +54,11 @@
 }
 
 #button_reserve, #button_review{
+    float:right;
+    width: 150px;
+}
+
+#button_edit, #button_delete{
     float:right;
     width: 150px;
 }

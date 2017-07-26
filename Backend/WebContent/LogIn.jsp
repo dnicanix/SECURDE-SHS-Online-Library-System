@@ -1,5 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
@@ -27,7 +29,7 @@
                    <img id = "ic_dlsu" src = "img/ic_dlsu.png" width = "170" height = "170">
                </div>
                <div class = "col-md-7">   
-                   <form id = "form_login" action = "LogInServlet" method = "POST">
+                   <form id = "form_login" action = "LogIn" method = "POST">
                    <c:if test ="${errorMessage != null}">
                    	<label style="color:red;margin-top:-20px;">${errorMessage}</label>
                    </c:if>  
@@ -45,7 +47,7 @@
                    </form>
                    
                    <div id = "div_forgotpass_signup">
-                       <a href = "#">Forgot Password?</a> || <a href = "SignUp.jsp">Sign Up</a>
+                       <a href = "ForgotPassword.jsp">Forgot Password?</a> || <a href = "SignUp.jsp">Sign Up</a>
                    </div>
                </div>
            </div>
@@ -59,12 +61,27 @@
            </div>
         </div>
     </div>
-
-  
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+  	<!-- ALERT SCRIPTS -->
+    <c:if test ="${statusAdd != null}">
+    <script>
+    	$(document).ready(function(){
+    		alert("${statusAdd}");
+    	});
+    </script>
+    </c:if>
+    <c:if test ="${statusChangePassword!= null}">
+    <script>
+    	$(document).ready(function(){
+    		alert("${statusChangePassword}");
+    	});
+    </script>
+    </c:if>
   </body>
   
 </html>

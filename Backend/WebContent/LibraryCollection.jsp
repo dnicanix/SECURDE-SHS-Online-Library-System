@@ -30,15 +30,20 @@
         <!-- Sidebar header -->
         <div class="sidebar-header header-cover">
             <!-- Sidebar brand image -->
-            <a href = "LogOutServlet" title = "Logout"><img src = "img/ic_logout.png" style = "float:right;margin-top:10px;margin-right:10px;" width = "30" height = "30"></a>
+            <a href = "LogOut" title = "Logout"><img src = "img/ic_logout.png" style = "float:right;margin-top:10px;margin-right:10px;" width = "30" height = "30"></a>
             <center>
                 <div class="sidebar-image">
-                    <img src="img/ic_student.png" class = "img-rounded">
+                	<c:if test = "${role == 'Student'}">
+                    	<img src="img/ic_student.png" class = "img-rounded">
+                    </c:if>
+                	<c:if test = "${role == 'Faculty'}">
+                    	<img src="img/ic_teacher.png" class = "img-rounded">
+                    </c:if>
                 </div>
             </center>
             <!-- Sidebar brand name -->
             <div class="sidebar-brand">
-                ${fullname} <p style = "margin-top:-30px;font-size:12px;">Student</p>
+                ${fullname} <p style = "margin-top:-30px;font-size:12px;"> ${role} </p>
             </div>
         </div>
 
@@ -52,13 +57,13 @@
                 </a>
             </li>
             <li class = "active">
-                <a href="#">
+                <a href="LibraryCollection">
                     <img src = "img/ic_librarycollection.png" class = "img_icons"/>
                     Library Collection
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="MeetingRooms">
                     <img src = "img/ic_meetingrooms.png" class = "img_icons"/>
                     Meeting Rooms
                 </a>
@@ -85,26 +90,66 @@
             </div>
             <div class = "row">
                 <div class = "col-md-3" style = "float:left;">
-                    <select class="selectpicker show-tick" data-width="250">  
-                     <option selected>All</option>
-                     <option>Filter by Books</option>
-                     <option>Filter by Thesis</option>
-                     <option>Filter by Magazines</option>
+                    <select id = "select_category" class="selectpicker show-tick" data-width="250" 
+                    		onchange = "filterSearchByCategory();">  
+					<c:if test = "${filterresults == '0' }">
+					 <option value = "0" selected>All</option>
+                     <option value = "1">Filter by Books</option>
+                     <option value = "2">Filter by Thesis</option>
+                     <option value = "3">Filter by Magazines</option>
+                    </c:if>
+                    <c:if test = "${filterresults == '1' }">
+					 <option value = "0">All</option>
+                     <option value = "1" selected>Filter by Books</option>
+                     <option value = "2">Filter by Thesis</option>
+                     <option value = "3">Filter by Magazines</option>
+                    </c:if>
+                    <c:if test = "${filterresults == '2' }">
+					 <option value = "0">All</option>
+                     <option value = "1">Filter by Books</option>
+                     <option value = "2" selected>Filter by Thesis</option>
+                     <option value = "3">Filter by Magazines</option>
+                     </c:if>
+                    <c:if test = "${filterresults == '3' }">
+					 <option value = "0">All</option>
+                     <option value = "1">Filter by Books</option>
+                     <option value = "2">Filter by Thesis</option>
+                     <option value = "3" selected>Filter by Magazines</option>
+                    </c:if>
                     </select>
                 </div>
                 <div class = "col-md-9" style = "float:right;">
-                    <form role="search" class = "form-horizontal">
+                    <form role="search" class = "form-horizontal" action = "SearchReadings" method = "POST">
                         <div class="input-group col-md-4" style = "float:right;">
-                            <input type="text" class="form-control" placeholder="Type your search here..." name="q">
+	                        <c:if test ="${empty(searchinput)}">
+	                            <input id = "input_search" type="text" class="form-control" placeholder="Type your search here..." 
+                            	name="input_search">
+	                        </c:if>
+	                        <c:if test ="${not empty(searchinput)}">
+	                            <input id = "input_search" type="text" class="form-control" placeholder="${searchinput}" 
+                            	name="input_search" value = "${searchinput}">
+	                        </c:if>
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                             </div>
                         </div>
                         <div class = "input-group col-md-4" style = "float:right;"><label style = "margin-top:5px;margin-left:40px;">Search by:</label>
-                            <select class="selectpicker show-tick" data-width="auto">
-                             <option>Title</option>
-                             <option>Author</option>
-                             <option>Publisher</option>
+                            <select id = "select_searchfilter" name = "select_searchfilter" class="selectpicker show-tick" data-width="auto">
+	                             <c:if test = "${searchfilter == 'Title' }">
+		                             <option value = "Title" selected>Title</option>
+		                             <option value = "Author">Author</option>
+		                             <option value = "Publisher">Publisher</option>
+	                             </c:if>
+	                             <c:if test = "${searchfilter == 'Author' }">
+		                             <option value = "Title">Title</option>
+		                             <option value = "Author" selected>Author</option>
+		                             <option value = "Publisher">Publisher</option>
+	                             </c:if>
+	                             <c:if test = "${searchfilter == 'Publisher' }">
+		                             <option value = "Title">Title</option>
+		                             <option value = "Author">Author</option>
+		                             <option value = "Publisher" selected>Publisher</option>
+	                             </c:if>
                             </select>
                         </div>
                     </form>
@@ -122,7 +167,7 @@
             
             </div>
             <div class = "row">
-                <p id = "p_resultscount"> ----- Showing 50 results -----</p>
+                <p id = "p_resultscount"> ----- Showing ${readingssize} results -----</p>
             </div>
             
             <!--- L I B R A R Y   C O L L E C T I O N --->
@@ -130,13 +175,19 @@
             <div id = "div_readingmaterial" class = "row">
                 <div class = "col-md-1"> <p class = "p_number">${loop.index + 1}</p> </div>
                 <div id = "div_readingmaterialdetails" class = "col-md-11">
-                     <p id = "title"> <a href = "#" id = "${c.readingid}"> ${c.readingtitle} </a>
+                     <p id = "title"> <a href = "#" id = "${c.readingid}" class = "a_reading"> ${c.readingtitle} </a>
                          <c:if test ="${c.status == 'Available'}">
                          <button name = "${c.readingid}" id = "button_reserve" type="button" class="button_reserve btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> RESERVE
                          </button>
                          </c:if>
                          <c:if test ="${c.status == 'Reserved'}">
+                         <button id = "button_reserve" type="button" class="btn btn-primary btn-sm"
+                         		 disabled = "disabled">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> RESERVE
+                         </button>
+                         </c:if>
+                         <c:if test ="${c.status == 'Out'}">
                          <button id = "button_reserve" type="button" class="btn btn-primary btn-sm"
                          		 disabled = "disabled">
                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> RESERVE
@@ -197,18 +248,18 @@
      		</c:forEach>
         </div>
       </div>
-      
-       <!-- HIDDEN FORMS FOR SIDE NAV BAR -->
-	   <form id = "form_meetingrooms" action="#" method="POST">
-		    <input type="hidden" name="meetingrooms"/>
-	   </form>
-	   <form id = "form_librarycollection" action="#" method="POST">
-		    <input type="hidden" name="librarycollection"/>
-	   </form>
-	   
-	   <!-- OTHER HIDDEN FORMS -->
-	   <form id = "form_reservereading" action = "ReserveReadingServlet" method = "POST">
+       
+	   <!-- HIDDEN FORMS -->
+	   <form id = "form_reservereading" action = "ReserveReading" method = "POST">
       	 <input name = "readingid" type="hidden" id="hiddeninput-reading">
+       </form>
+ 	   <form id = "form_searchbycategory" action = "FilterByCategory" method = "POST">
+      	 <input name = "categoryid" type="hidden" id="hiddeninput-category">
+      	 <input name = "select_searchfilter" type="hidden" id="hiddeninput-searchfilter">
+      	 <input name = "input_search" type="hidden" id="hiddeninput-searchinput">
+       </form>
+        <form id = "form_viewreading" action = "ViewReading" method = "POST">
+      	 <input name = "readingid" type="hidden" id="hiddeninput-viewreading">
        </form>
  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -218,7 +269,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sidenavbar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-	  	<script>
+	<script>
 	  	$(document).ready(function(){
 	  		$("button.button_reserve").click(function(){
 	  			var readingID = $(this).attr("name");
@@ -228,6 +279,25 @@
 	  	  	});
 	  	});
 	  	
+	  	$(document).ready(function(){
+	  		$("a.a_reading").click(function(){
+	  			var readingID = $(this).attr("id");
+				$("#hiddeninput-viewreading").val(readingID);
+				$("#form_viewreading").submit();
+	  	  	});
+	  	});
+  	</script>
+  	<script>
+	  	function filterSearchByCategory(){
+	  		var categoryID = document.getElementById('select_category').value
+	  		var searchfilter = document.getElementById('select_searchfilter').value
+	  		var searchinput = document.getElementById('input_search').value
+	  		$("#hiddeninput-category").val(categoryID);
+	  		$("#hiddeninput-searchfilter").val(searchfilter);
+	  		$("#hiddeninput-searchinput").val(searchinput);
+			$("#form_searchbycategory ").submit();
+	  	};
+  	
   	</script>
   </body>
   

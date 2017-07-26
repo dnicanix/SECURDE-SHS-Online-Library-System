@@ -109,9 +109,10 @@ public class ReadingsService {
 		return readingslist;
 	}
 
-	public static void addReading(Readings reading){
+	public static boolean addReading(Readings reading){
 		//INSERT INTO readings(readingtitle, categoryid, location, author, publisher, year, tags, status)
 		//VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+		boolean isAddSuccess = false;
 		
 		String sql = "INSERT INTO " + Readings.TABLE_NAME + "("
 				+ Readings.COLUMN_READINGTITLE + ",  "
@@ -136,6 +137,7 @@ public class ReadingsService {
 			
 			pstmt.executeUpdate();
 			System.out.println("Readings successfully aded in DB!!!");
+			isAddSuccess = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,6 +151,7 @@ public class ReadingsService {
 				e.printStackTrace();
 			}
 		}
+		return isAddSuccess;
 		
 	}
 	
@@ -158,7 +161,10 @@ public class ReadingsService {
 		//UPDATE readings SET readingtitle = ?, author = ?, publisher = ?, year = ?, tags = ?
 		//WHERE readingid = ?;
 		
+		int readingid = reading.getReadingid();
 		String newReadingTitle = reading.getReadingtitle();
+		int newCategoryId = reading.getCategoryid();
+		String newLocation = reading.getLocation();
 		String newAuthor = reading.getAuthor();
 		String newPublisher = reading.getPublisher();
 		String newYear = reading.getYear();
@@ -166,6 +172,7 @@ public class ReadingsService {
 		String newStatus = reading.getStatus();
 		
 		String sql = "UPDATE " + Readings.TABLE_NAME + " SET " + Readings.COLUMN_READINGTITLE + "=?, "
+				+ Readings.COLUMN_CATEGORYID + "=?," + Readings.COLUMN_LOCATION + "=?, " 
 				+ Readings.COLUMN_AUTHOR + "=?, " + Readings.COLUMN_PUBLISHER + "=?, "
 				+ Readings.COLUMN_YEAR + "=?, " + Readings.COLUMN_TAGS + "=?, "
 				+ Readings.COLUMN_STATUS + "=? WHERE "
@@ -177,11 +184,14 @@ public class ReadingsService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, newReadingTitle);
-			pstmt.setString(2, newAuthor);
-			pstmt.setString(3, newPublisher);
-			pstmt.setString(4, newYear);
-			pstmt.setString(5, newTags);
-			pstmt.setString(6, newStatus);
+			pstmt.setInt(2, newCategoryId);
+			pstmt.setString(3, newLocation);
+			pstmt.setString(4, newAuthor);
+			pstmt.setString(5, newPublisher);
+			pstmt.setString(6, newYear);
+			pstmt.setString(7, newTags);
+			pstmt.setString(8, newStatus);
+			pstmt.setInt(9, readingid);
 			
 			pstmt.executeUpdate();
 			
@@ -518,7 +528,8 @@ public class ReadingsService {
 		return readingslist;
 	}
 	
-	public static void deleteReadings(int readingid){
+	public static boolean deleteReadings(int readingid){
+		boolean isDeleteSuccess = false;
 		String sql = "DELETE FROM " + Readings.TABLE_NAME 
 				+ " WHERE " + Readings.COLUMN_READINGID + " = ?";
 		
@@ -531,9 +542,11 @@ public class ReadingsService {
 			
 			pstmt.executeUpdate();
 			System.out.println("Readings successfully deleted in DB!!!");
+			isDeleteSuccess=true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			isDeleteSuccess=false;
 		}finally{
 			try {
 				pstmt.close();
@@ -543,5 +556,6 @@ public class ReadingsService {
 				e.printStackTrace();
 			}
 		}
+		return isDeleteSuccess;
 	}
 }

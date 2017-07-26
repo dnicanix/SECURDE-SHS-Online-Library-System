@@ -4,7 +4,7 @@ public class ReservedRoom {
 
 	public static final String TABLE_NAME = "reserved_rooms";
 	public static final String COLUMN_ROOMID = "roomid";
-	public static final String COLUMN_USERID = "userd";
+	public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_DATE = "date";
 	public static final String COLUMN_STARTTIME = "starttime";
 	public static final String COLUMN_ENDTIME = "endtime";
