@@ -16,7 +16,9 @@
     <link href="https://fonts.googleapis.com/css?family=Gudea:400,400i,700|Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
     <link href="css/global.css" rel="stylesheet">
     <link href="css/meetingrooms.css" rel="stylesheet">
+    <link href="css/m-meetingrooms.css" rel="stylesheet">
     <link href="css/sidenavbar.css" rel="stylesheet">
+    <link href="css/modal.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
@@ -34,12 +36,12 @@
             <a href = "#" title = "Logout"><img src = "img/ic_logout.png" style = "float:right;margin-top:10px;margin-right:10px;" width = "30" height = "30"></a>
             <center>
                 <div class="sidebar-image">
-                    <img src="img/ic_student.png" class = "img-rounded">
+                    <img src="img/ic_librarian.png" class = "img-rounded">
                 </div>
             </center>
             <!-- Sidebar brand name -->
             <div class="sidebar-brand">
-                ${fullname}  <p style = "margin-top:-30px;font-size:12px;">${role}</p>
+                ${fullname} <p style = "margin-top:-30px;font-size:12px;">${role}</p>
             </div>
         </div>
 
@@ -53,15 +55,21 @@
                 </a>
             </li>
             <li>
-                <a href="LibraryCollection">
+                <a href="SM-LibraryCollection">
                     <img src = "img/ic_librarycollection.png" class = "img_icons"/>
                     Library Collection
                 </a>
             </li>
             <li class = "active">
-                <a href="MeetingRooms">
+                <a href="#">
                     <img src = "img/ic_meetingrooms.png" class = "img_icons"/>
                     Meeting Rooms
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src = "img/ic_export.png" class = "img_icons"/>
+                    Generate Status Report
                 </a>
             </li>
         </ul>
@@ -108,6 +116,7 @@
                     </div>
                 </div>
             </form>
+
             <table id = "table_meetingrooms" class="table table-bordered">
                 <thead>
                     <tr>
@@ -126,7 +135,7 @@
                         <th> 8:00 PM </th>
                     </tr>
                 </thead>
-                <tbody>
+              <tbody>
                     <tr>
                         <td> 123 </td>
                         
@@ -139,12 +148,11 @@
 		            							c.starttime == '5:00 AM' || c.starttime == '6:00 AM' ||
 		            							c.starttime == '7:00 AM' || c.starttime == '8:00 AM')
 		            							&& (c.userid != 0)}">                
-		                        	<td id = "td_reserved"> </td>
+		                        	<td id = "td_reserved" data-toggle = "modal" data-target = ".modal_delete"
+		                        		name = "${c.reservedroomid}"> </td>
 		                        </c:when>    
 		                        <c:otherwise>
-		                        	<td id = "td_available"><a id = "123 ${c.starttime}" class = "a_available" 
-			                        	data-toggle="collapse" href="#collapse_reserve" aria-expanded="false" 
-			                        	aria-controls="collapse_reserve">&nbsp;</a> </td>
+		                        	<td id = "td_available"><a id = "123 ${c.starttime}" class = "a_available">&nbsp;</a> </td>
 		                        </c:otherwise>      
 	
 	                        </c:choose>
@@ -161,12 +169,10 @@
 		            							c.starttime == '5:00 AM' || c.starttime == '6:00 AM' ||
 		            							c.starttime == '7:00 AM' || c.starttime == '8:00 AM')
 		            							&& (c.userid != 0)}">                
-		                        	<td id = "td_reserved"> </td>
+		                        	<td name = "${c.reservedroomid}" id = "td_reserved" data-toggle = "modal" data-target = ".modal_delete"> </td>
 		                        </c:when>    
 		                        <c:otherwise>
-		                        	<td id = "td_available"><a id = "456 ${c.starttime}" class = "a_available" 
-		                        		data-toggle="collapse" href="#collapse_reserve" aria-expanded="false" 
-		                        		aria-controls="collapse_reserve">&nbsp;</a> </td>
+		                        	<td id = "td_available"><a id = "456 ${c.starttime}" class = "a_available">&nbsp;</a> </td>
 		                        </c:otherwise>      
 	
 	                        </c:choose>
@@ -184,12 +190,10 @@
 		            							c.starttime == '5:00 AM' || c.starttime == '6:00 AM' ||
 		            							c.starttime == '7:00 AM' || c.starttime == '8:00 AM')
 		            							&& (c.userid != 0)}">                
-		                        	<td id = "td_reserved"> </td>
+		                        	<td name = "${c.reservedroomid}" id = "td_reserved" data-toggle = "modal" data-target = ".modal_delete"}'> </td>
 		                        </c:when>    
 		                        <c:otherwise>
-		                        	<td id = "td_available"><a id = "789 ${c.starttime}" class = "a_available" 
-		                        		data-toggle="collapse" href="#collapse_reserve" aria-expanded="false" 
-		                        		aria-controls="collapse_reserve">&nbsp;</a> </td>
+		                        	<td id = "td_available"><a id = "789 ${c.starttime}" class = "a_available">&nbsp;</a> </td>
 		                        </c:otherwise>      
 	
 	                        </c:choose>
@@ -206,12 +210,11 @@
 		            							c.starttime == '5:00 AM' || c.starttime == '6:00 AM' ||
 		            							c.starttime == '7:00 AM' || c.starttime == '8:00 AM')
 		            							&& (c.userid != 0)}">                
-		                        	<td id = "td_reserved"> </td>
+		                        	<td id = "td_reserved" data-toggle = "modal" data-target = ".modal_delete"
+		                        		 name = "${c.reservedroomid}"> </td>
 		                        </c:when>    
 		                        <c:otherwise>
-		                        	<td id = "td_available"><a id = "901 ${c.starttime}" class = "a_available" 
-		                        		data-toggle="collapse" href="#collapse_reserve" aria-expanded="false" 
-		                        		aria-controls="collapse_reserve">&nbsp;</a> </td>
+		                        	<td id = "td_available"><a id = "901 ${c.starttime}" class = "a_available">&nbsp;</a> </td>
 		                        </c:otherwise>      
 	
 	                        </c:choose>
@@ -228,94 +231,111 @@
 		            							c.starttime == '5:00 AM' || c.starttime == '6:00 AM' ||
 		            							c.starttime == '7:00 AM' || c.starttime == '8:00 AM')
 		            							&& (c.userid != 0)}">                
-		                        	<td id = "td_reserved"> </td>
+		                        	<td id = "td_reserved" data-toggle = "modal" data-target = ".modal_delete"
+		                        	    name = "${c.reservedroomid}"> </td>
 		                        </c:when>    
 		                        <c:otherwise>
-		                        	<td id = "td_available"><a id = "234 ${c.starttime}" class = "a_available" 
-		                        		data-toggle="collapse" href="#collapse_reserve" aria-expanded="false" 
-		                        		aria-controls="collapse_reserve">&nbsp;</a> </td>
+		                        	<td id = "td_available"><a id = "234 ${c.starttime}" class = "a_available">&nbsp;</a> </td>
 		                        </c:otherwise>      
 	
 	                        </c:choose>
                         </c:forEach>
                     </tr>
-                </tbody>
+                </tbody>                
             </table>
-            <div class="collapse" id="collapse_reserve">
-              <div class="well">
-                <p id = "p_reserve">Do you want to reserve room?</p>
-                  <button id = "button_reserve" type="button" class="btn btn-primary">
-                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> YES
-                  </button> 
-                  <button id = "button_cancel" type="button" class="btn btn-primary" data-dismiss = "collapse" target="#collapse_reserve" data-dismiss="collapse">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  CANCEL
-                  </button>
-              </div>
-            </div>
             </center>
 
         </div>
       </div>
-    
+
+    <!-- DELETE RESERVATION MODAL -->
+     <div class="modal fade modal_delete" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="addaymodal-container" id="delete-container">
+            <center>
+                <form id = "form_deletereservation" class="form form-horizontal" action="M-DeleteRoomReservation" method="POST" style = "margin-bottom:70px;" >
+                    Do you want to remove this reservation?
+                    <div class="text-center" style = "margin-top: 30px;">
+                        <input name = "reservedroomid" type="hidden" id="hiddeninput-deleteroomreservation">
+                        <input name = "date" type = "hidden" id = "hiddeninput-date">
+                        <button id="button_confirmdelete" type="submit" class="btn btn-success col-xs-4 submit" style="margin-left:40px; margin-right:30px;font-size:14px;"> <i class="glyphicon glyphicon-th-list"></i> YES </button>
+                        <button type="button" class="btn btn-danger col-xs-4 cancel" data-dismiss="modal" style=" margin-left: 20px;font-size:14px;"> <i class="glyphicon glyphicon-remove"></i> CANCEL </button>
+
+                    </div>
+                </form>
+            </center>
+            
+        </div>
+       </div>
+      </div>
+      
     <!-- HIDDEN FORMS -->
-   	<form id = "form_reservemeetingroom" action = "ReserveMeetingRoom" method = "POST">
-    	<input name = "date" type="hidden" id="hiddeninput-date">
-    	<input name = "roomtime" type="hidden" id="hiddeninput-roomtime">
-    </form> 
-    
-   	<form id = "form_viewmeetingrooms" action = "MeetingRooms" method = "POST">
-    	<input name = "date" type="hidden" id="hiddeninput-newdate">
-    </form> 
-    
-     
+    <c:if test = "${role == 'Library Staff'}">
+		<form id = "form_viewmeetingrooms_staff" action = "MeetingRooms" method = "POST">
+	    	<input name = "date" type="hidden" id="hiddeninput-newdate-staff">
+	    </form> 
+	</c:if>
+    <c:if test = "${role == 'Library Manager'}">
+		<form id = "form_viewmeetingrooms_manager" action = "M-MeetingRooms" method = "POST">
+	    	<input name = "date" type="hidden" id="hiddeninput-newdate-manager">
+	    </form> 
+	</c:if>
+       
+      
     <!-- For datepicker -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/daterangepicker.js"></script>
-    <script type="text/javascript">
-
-        $(function() {
-            var currDate = moment.currDate;
-
-            $('input[name="dailydate"]').daterangepicker({
-              singleDatePicker: true,
-              showDropdowns: true,
-              value: currDate,
-              locale: {
-                format: 'MM-DD-YYYY'
-               }
-            },
-            
-            function(start, end, label) {
-            	var date = start.format('MM-DD-YYYY') 
-            	$("#hiddeninput-newdate").val(date);
-            	$("#form_viewmeetingrooms").submit();
-            });
-            
-        });
-
-        $(document).ready(function() {
-            $("a.a_available").click(function(event) {
-                $("#collapse_reserve").show();
-                $("#button_reserve").attr("name", event.target.id);
-                $('p#p_reserve').text('Do you want to reserve room ' + event.target.id + " timeslot?") ;
-            });
-            
-	  		$("button#button_reserve").click(function(){
-	  			var date = document.getElementById('dailydate').value
-	  			var roomtime = $(this).attr("name");
-				$("#hiddeninput-date").val(date);
-				$("#hiddeninput-roomtime").val(roomtime);
-				$("#form_reservemeetingroom").submit();
-	  	  	});
-            
-            $("#button_cancel").click(function(event) {
-                $("#collapse_reserve").hide();
-            });
-        });
+    <c:if test = "${role == 'Library Staff'}">
+    <script>
+	    $(function() {
+	        var currDate = moment.currDate;
+	
+	        $('input[name="dailydate"]').daterangepicker({
+	          singleDatePicker: true,
+	          showDropdowns: true,
+	          value: currDate,
+	          locale: {
+	            format: 'MM-DD-YYYY'
+	           }
+	        },
+	        
+	        function(start, end, label) {
+	        	var date = start.format('MM-DD-YYYY') 
+	        	$("#hiddeninput-newdate-staff").val(date);
+	        	$("#form_viewmeetingrooms_staff").submit();
+	        });
+	        
+	    });
     </script>
+    </c:if>
+    
+    <c:if test = "${role == 'Library Manager'}">
+    <script>
+	    $(function() {
+	        var currDate = moment.currDate;
+	
+	        $('input[name="dailydate"]').daterangepicker({
+	          singleDatePicker: true,
+	          showDropdowns: true,
+	          value: currDate,
+	          locale: {
+	            format: 'MM-DD-YYYY'
+	           }
+	        },
+	        
+	        function(start, end, label) {
+	        	var date = start.format('MM-DD-YYYY') 
+	        	$("#hiddeninput-newdate-manager").val(date);
+	        	$("#form_viewmeetingrooms_manager").submit();
+	        });
+	        
+	    });
+    </script>
+    </c:if>
+    
     <c:if test = "${date != null}">
 	    <script type="text/javascript">
 	        $(function() {
@@ -324,20 +344,50 @@
 	    	});
 	    </script>
    	</c:if>
-      
+   	
+   	<script>
+   	$(document).ready(function() {
+        $("td#td_reserved").click(function(event) {
+	    	var reservedroomid = $(this).attr("name");
+	    	var date = document.getElementById('dailydate').value
+	    	
+	    	alert("nyaaaaar" + reservedroomid + date);
+            $("#hiddeninput-deleteroomreservation").val(reservedroomid);
+            $("#hiddeninput-date").val(date);
+        });
+   	});
+   	</script>
+    
+    <!--  
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("td").click(function(event) {
+                alert(event.target.id);
+                $("#collapse_editmeetingroom").show();
+
+            });
+            
+            $("#button_cancel").click(function(event) {
+                $("#collapse_editmeetingroom").hide();
+            });
+        });
+    </script>
+    -->
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/sidenavbar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-  	
   	<!-- ALERT SCRIPTS -->
-    <c:if test ="${statusReserve != null}">
+	<c:if test ="${statusDelete != null}">
     <script>
     	$(document).ready(function(){
-    		alert("${statusReserve}");
+    		alert("${statusDelete}");
     	});
     </script>
-    </c:if>
+    </c:if> 
+	
+	  
   </body>
   
 </html>

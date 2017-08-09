@@ -92,7 +92,76 @@
                   </a>
             </div>
             </center>
+            
+            <div class = "row">
+                <p class="pageheader"> <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> User Accounts </p>
+            </div>
+            
+            <center>
+	            <div class = "row">
+	            
+	                <table id = "table_users" class="table table-bordered">
+	                    <thead>
+	                        <tr>
+	                            <th> # </th>
+	                            <th> ID Number </th>
+	                            <th> Username</th>
+	                            <th> First Name </th>
+	                            <th> MI </th>
+	                            <th> Last Name </th>
+	                            <th> Role </th>
+	                            <th> Account Status </th>
+	                            
+	                        </tr>
+	                    </thead>  
+	                    <tbody>
+	                    	<c:forEach var = "c" items = "${users}" varStatus="loop">
+	                        <tr>
+	                            <td> ${loop.index + 1} </td>
+	                            <td> ${c.idnum} </td>
+	                            <td> ${c.username} </td>
+	                            <td> ${c.firstname} </td>
+	                            <td> ${c.middleinitial} </td>
+	                            <td> ${c.lastname} </td>
+	                            <td> ${c.role} </td>
+	                            
+	                            <c:if test = "${c.status == 'Pending'}">
+	                            	<td id = "td_pending"><i>PENDING</i></td>
+	                            </c:if>
+	                            <c:if test = "${c.status == 'Activated'}">
+	                            	<td id = "td_active"><i>ACTIVATED</i></td>
+	                            </c:if>
+	                            <c:if test = "${c.status == 'Locked'}">
+	                            	<td id = "td_locked" name = "${c.userid}"><a id = "" class = "a_locked" data-toggle = "modal" data-target = ".modal_unlock"><i>LOCKED</i></a> </td>
+	                        	</c:if>
+	                        </tr>
+	                        </c:forEach>	
+	                    </tbody>
+	                </table>
+	                
+	            </div>
+            </center>
+            
         </div>
+      </div>
+
+	 <!-- UNLOCK MODALL -->
+     <div class="modal fade modal_unlock" id="modal_unlock" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="addaymodal-container" id="unlock-container">
+            <center>
+                <form id = "form_unlockaccount" class="form form-horizontal" action="UnlockAccount" method="POST" style = "margin-bottom:70px;" >
+                    This account is locked. Do you want to unlock it?
+                    <div class="text-center" style = "margin-top: 30px;">
+                    	<input name = "userid" type="hidden" id="hiddeninput-userid">
+                        <button id="button_confirmunlock" type="submit" class="btn btn-success col-xs-4 submit" style="margin-left:40px; margin-right:30px;font-size:14px;"> <i class="glyphicon glyphicon-th-list"></i> YES </button>
+                        <button type="button" class="btn btn-danger col-xs-4 cancel" data-dismiss="modal" style=" margin-left: 20px;font-size:14px;"> <i class="glyphicon glyphicon-remove"></i> CANCEL </button>
+                    </div>
+                </form>
+            </center>
+            
+        </div>
+       </div>
       </div>
       
      <!-- ADD ACCOUNT MODAL -->
@@ -157,14 +226,19 @@
                        <label class="col-sm-4 control-label" id = "label_title">Password</label>
                            <div class="col-sm-8">
                                <input name = "password" type="password" class="form-control" id="input_password"
-                               	      required = "true">
+                               	     data-toggle="tooltip" data-placement="right"
+                                     minlength = "8" maxlength = "20" title="Password must be atleast 8 characters
+                                     										with the strength Medium/Strong."
+                                     										required = "true">
+                           	   <span id="passstrength" style="font-weight:bold;"></span>
                            </div>
                    </div>
                   <div class="form-group" >
                        <label class="col-sm-4 control-label" id = "label_title"></label>
                            <div class="col-sm-8">
-                               <input name = "confirmpassword" type="passord" class="form-control" id="input_confirmpassword"
-                                      placeholder = "Re-enter password" required = "true">
+                               <input name = "confirmpassword" type="password" class="form-control" id="input_confirmpassword"
+                                      placeholder = "Re-enter password" onkeyup = "checkPass(); return false;" required="true">   
+                              <span id="confirmMessage"></span>  
                            </div>
                    </div>
                   <div class="form-group" >
@@ -222,13 +296,86 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sidenavbar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+  	<script>
+   	$(document).ready(function() {
+        $("td#td_locked").click(function(event) {
+	    	var userid = $(this).attr("name");
+	    	alert("nyaaaaar" + userid);
+            $("#hiddeninput-userid").val(userid);
+        });
+   	});
+   	</script>
+   	<script>
+		function checkPass()
+		{
+		    //Store the password field objects into variables ...
+		    var pass1 = document.getElementById('input_password');
+		    var pass2 = document.getElementById('input_confirmpassword');
+		    //Store the Confimation Message Object ...
+		    var message = document.getElementById('confirmMessage');
+		    //Set the colors we will be using ...
+		    var goodColor = "transparent";
+		    var badColor = "red";
+		    //Compare the values in the password field 
+		    //and the confirmation field
+		    if(pass1.value == pass2.value){
+		        //The passwords match. 
+		        //Set the color to the good color and inform
+		        //the user that they have entered the correct password 
+		        //pass2.style.backgroundColor = goodColor;
+		        message.style.color = "green";
+		        message.innerHTML = "Passwords Match!";
+		        document.getElementById("btn_signup").disabled = false;
+		    }else{
+		        //The passwords do not match.
+		        //Set the color to the bad color and
+		        //notify the user.
+		        //pass2.style.backgroundColor = goodColor;
+		        message.style.color = badColor;
+		        message.innerHTML = "Passwords Do Not Match!";
+		        document.getElementById("btn_signup").disabled = true;
+		    }
+		}  
+	</script>
+   	<script>
+		$('#input_password').keyup(function(e) {
+		     var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+		     var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+		     var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+		     if (false == enoughRegex.test($(this).val())) {
+		             $('#passstrength').html('More Characters...');
+		             $('#passstrength').css('color', 'red');
+		             $('#button_addaccount').prop('disabled', true);
+		     } else if (strongRegex.test($(this).val())) {
+		             $('#passstrength').css('color', 'green');
+		             $('#passstrength').html('Strength: Strong!');
+		             $('#button_addaccount').prop('disabled', false);
+		     } else if (mediumRegex.test($(this).val())) {
+		    	 	 $('#passstrength').css('color', 'orange');
+		             $('#passstrength').html('Strength: Medium!');
+		             $('#button_addaccount').prop('disabled', false);
+		     } else {
+		    	 	 $('#passstrength').css('color', 'red');
+		             $('#passstrength').html('Strength: Weak!');
+		             $('#button_addaccount').prop('disabled', true);
+		     }
+		     return true;
+		});
+	</script>
   	<!-- ALERT SCRIPTS -->
     <c:if test ="${statusAdd != null}">
-    <script>
-    	$(document).ready(function(){
-    		alert("${statusAdd}");
-    	});
-    </script>
+	    <script>
+	    	$(document).ready(function(){
+	    		alert("${statusAdd}");
+	    	});
+	    </script>
+    </c:if>
+    <c:if test ="${statusUnlock != null}">
+	    <script>
+	    	$(document).ready(function(){
+	    		alert("${statusUnlock}");
+	    	});
+	    </script>
     </c:if>
   </body>
   

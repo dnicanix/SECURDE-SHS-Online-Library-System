@@ -75,24 +75,21 @@
                         </div>
                        <div class="form-group">
                             <label class="col-sm-3 control-label" id = "label_password" required = "true">Password</label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-8">
                               <input name = "password" type="password" class="form-control" id="input_password" data-toggle="tooltip" data-placement="right"
-                                     minlength = "8" maxlength = "20" title="Password must be atleast 8 characters with
-                                      		 1 uppercase letter, 1 number and 1 special character." required="true">
+                                     minlength = "8" maxlength = "20" title="Password must be atleast 8 characters
+                                     										with the strength Medium/Strong." required="true">
+                              
+                              <span id="passstrength" style="font-weight:bold;"></span>
                             </div>
                        </div>
                        <div class="form-group">
                             <label class="col-sm-3 control-label" id = "label_confirmpassword"></label>
                             <div class="col-sm-7">
                               <input name = "confirmpassword" type="password" class="form-control" id="input_confirmpassword" placeholder="Re-enter password"
-                              		 onkeyup = "checkPass(); return false;" required="true">          
+                              		 onkeyup = "checkPass(); return false;" required="true">   
+                              <span id="confirmMessage"></span>       
                             </div>
-                       </div>
-                       <div class = "form-group">
-                       		<div class ="col-sm-3"></div>
-                       		<div class ="col-sm-7">
-                       		<span id="confirmMessage" style = "margin-top:-10px;"></span>
-                       		</div>
                        </div>
                        <div class="form-group">
                             <label class="col-sm-3 control-label" id = "label_email">Email Add.</label>
@@ -136,6 +133,7 @@
 
       
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
@@ -176,6 +174,32 @@
 		        document.getElementById("btn_signup").disabled = true;
 		    }
 		}  
+	</script>
+
+	<script>
+		$('#input_password').keyup(function(e) {
+		     var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+		     var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+		     var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+		     if (false == enoughRegex.test($(this).val())) {
+		             $('#passstrength').html('More Characters...');
+		             $('#passstrength').css('color', 'red');
+		             $('#btn_signup').prop('disabled', true);
+		     } else if (strongRegex.test($(this).val())) {
+		             $('#passstrength').css('color', 'green');
+		             $('#passstrength').html('Strength: Strong!');
+		             $('#btn_signup').prop('disabled', false);
+		     } else if (mediumRegex.test($(this).val())) {
+		    	 	 $('#passstrength').css('color', 'orange');
+		             $('#passstrength').html('Strength: Medium!');
+		             $('#btn_signup').prop('disabled', false);
+		     } else {
+		    	 	 $('#passstrength').css('color', 'red');
+		             $('#passstrength').html('Strength: Weak!');
+		             $('#btn_signup').prop('disabled', true);
+		     }
+		     return true;
+		});
 	</script>
 
   </body>

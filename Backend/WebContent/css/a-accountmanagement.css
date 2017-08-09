@@ -11,3 +11,22 @@
 .thumbnail{
     padding:20px;
 }
+
+#table_users{
+    background: rgba(255,255,255,0.50);
+}
+
+.a_locked{
+    color: red;
+    font-weight: bold;
+}
+
+#td_active{
+    color: green;
+    font-weight: bold;
+}
+
+#td_pending{
+    color: orange;
+    font-weight: bold;
+}

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.owasp.esapi.ESAPI;
+
 import edu.securde.beans.ReadingCategory;
 import edu.securde.beans.Readings;
 import edu.securde.db.DBPool;
@@ -32,13 +34,13 @@ public class ReadingsService {
 			while(rs.next()){
 				Readings r = new Readings();
 				r.setReadingid(rs.getInt(Readings.COLUMN_READINGID));
-				r.setReadingtitle(rs.getString(Readings.COLUMN_READINGTITLE));
+				r.setReadingtitle(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_READINGTITLE)));
 				r.setCategoryid(rs.getInt(Readings.COLUMN_CATEGORYID));
-				r.setLocation(rs.getString(Readings.COLUMN_LOCATION));
-				r.setAuthor(rs.getString(Readings.COLUMN_AUTHOR));
-				r.setPublisher(rs.getString(Readings.COLUMN_PUBLISHER));
-				r.setYear(rs.getString(Readings.COLUMN_YEAR));
-				r.setTags(rs.getString(Readings.COLUMN_TAGS));
+				r.setLocation(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_LOCATION)));
+				r.setAuthor(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_AUTHOR)));
+				r.setPublisher(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_PUBLISHER)));
+				r.setYear(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_YEAR)));
+				r.setTags(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_TAGS)));
 				r.setStatus(rs.getString(Readings.COLUMN_STATUS));
 				readingslist.add(r);
 			}
@@ -82,13 +84,13 @@ public class ReadingsService {
 			while(rs.next()){
 				Readings r = new Readings();
 				r.setReadingid(rs.getInt(Readings.COLUMN_READINGID));
-				r.setReadingtitle(rs.getString(Readings.COLUMN_READINGTITLE));
-				r.setCategoryid(category);
-				r.setLocation(rs.getString(Readings.COLUMN_LOCATION));
-				r.setAuthor(rs.getString(Readings.COLUMN_AUTHOR));
-				r.setPublisher(rs.getString(Readings.COLUMN_PUBLISHER));
-				r.setYear(rs.getString(Readings.COLUMN_YEAR));
-				r.setTags(rs.getString(Readings.COLUMN_TAGS));
+				r.setReadingtitle(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_READINGTITLE)));
+				r.setCategoryid(rs.getInt(Readings.COLUMN_CATEGORYID));
+				r.setLocation(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_LOCATION)));
+				r.setAuthor(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_AUTHOR)));
+				r.setPublisher(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_PUBLISHER)));
+				r.setYear(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_YEAR)));
+				r.setTags(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_TAGS)));
 				r.setStatus(rs.getString(Readings.COLUMN_STATUS));
 				readingslist.add(r);
 			}
@@ -236,13 +238,13 @@ public class ReadingsService {
 			while(rs.next()){
 				r = new Readings();
 				r.setReadingid(rs.getInt(Readings.COLUMN_READINGID));
-				r.setReadingtitle(rs.getString(Readings.COLUMN_READINGTITLE));
+				r.setReadingtitle(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_READINGTITLE)));
 				r.setCategoryid(rs.getInt(Readings.COLUMN_CATEGORYID));
-				r.setLocation(rs.getString(Readings.COLUMN_LOCATION));
-				r.setAuthor(rs.getString(Readings.COLUMN_AUTHOR));
-				r.setPublisher(rs.getString(Readings.COLUMN_PUBLISHER));
-				r.setYear(rs.getString(Readings.COLUMN_YEAR));
-				r.setTags(rs.getString(Readings.COLUMN_TAGS));
+				r.setLocation(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_LOCATION)));
+				r.setAuthor(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_AUTHOR)));
+				r.setPublisher(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_PUBLISHER)));
+				r.setYear(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_YEAR)));
+				r.setTags(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_TAGS)));
 				r.setStatus(rs.getString(Readings.COLUMN_STATUS));
 			}
 		} catch (SQLException e) {
@@ -354,13 +356,13 @@ public class ReadingsService {
 			while(rs.next()){
 				Readings r = new Readings();
 				r.setReadingid(rs.getInt(Readings.COLUMN_READINGID));
-				r.setReadingtitle(rs.getString(Readings.COLUMN_READINGTITLE));
+				r.setReadingtitle(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_READINGTITLE)));
 				r.setCategoryid(rs.getInt(Readings.COLUMN_CATEGORYID));
-				r.setLocation(rs.getString(Readings.COLUMN_LOCATION));
-				r.setAuthor(rs.getString(Readings.COLUMN_AUTHOR));
-				r.setPublisher(rs.getString(Readings.COLUMN_PUBLISHER));
-				r.setYear(rs.getString(Readings.COLUMN_YEAR));
-				r.setTags(rs.getString(Readings.COLUMN_TAGS));
+				r.setLocation(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_LOCATION)));
+				r.setAuthor(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_AUTHOR)));
+				r.setPublisher(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_PUBLISHER)));
+				r.setYear(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_YEAR)));
+				r.setTags(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_TAGS)));
 				r.setStatus(rs.getString(Readings.COLUMN_STATUS));
 				readingslist.add(r);
 			}
@@ -403,13 +405,13 @@ public class ReadingsService {
 			while(rs.next()){
 				Readings r = new Readings();
 				r.setReadingid(rs.getInt(Readings.COLUMN_READINGID));
-				r.setReadingtitle(rs.getString(Readings.COLUMN_READINGTITLE));
+				r.setReadingtitle(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_READINGTITLE)));
 				r.setCategoryid(rs.getInt(Readings.COLUMN_CATEGORYID));
-				r.setLocation(rs.getString(Readings.COLUMN_LOCATION));
-				r.setAuthor(rs.getString(Readings.COLUMN_AUTHOR));
-				r.setPublisher(rs.getString(Readings.COLUMN_PUBLISHER));
-				r.setYear(rs.getString(Readings.COLUMN_YEAR));
-				r.setTags(rs.getString(Readings.COLUMN_TAGS));
+				r.setLocation(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_LOCATION)));
+				r.setAuthor(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_AUTHOR)));
+				r.setPublisher(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_PUBLISHER)));
+				r.setYear(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_YEAR)));
+				r.setTags(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_TAGS)));
 				r.setStatus(rs.getString(Readings.COLUMN_STATUS));
 				readingslist.add(r);
 			}
@@ -452,13 +454,13 @@ public class ReadingsService {
 			while(rs.next()){
 				Readings r = new Readings();
 				r.setReadingid(rs.getInt(Readings.COLUMN_READINGID));
-				r.setReadingtitle(rs.getString(Readings.COLUMN_READINGTITLE));
+				r.setReadingtitle(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_READINGTITLE)));
 				r.setCategoryid(rs.getInt(Readings.COLUMN_CATEGORYID));
-				r.setLocation(rs.getString(Readings.COLUMN_LOCATION));
-				r.setAuthor(rs.getString(Readings.COLUMN_AUTHOR));
-				r.setPublisher(rs.getString(Readings.COLUMN_PUBLISHER));
-				r.setYear(rs.getString(Readings.COLUMN_YEAR));
-				r.setTags(rs.getString(Readings.COLUMN_TAGS));
+				r.setLocation(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_LOCATION)));
+				r.setAuthor(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_AUTHOR)));
+				r.setPublisher(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_PUBLISHER)));
+				r.setYear(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_YEAR)));
+				r.setTags(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_TAGS)));
 				r.setStatus(rs.getString(Readings.COLUMN_STATUS));
 				readingslist.add(r);
 			}
@@ -501,13 +503,13 @@ public class ReadingsService {
 			while(rs.next()){
 				Readings r = new Readings();
 				r.setReadingid(rs.getInt(Readings.COLUMN_READINGID));
-				r.setReadingtitle(rs.getString(Readings.COLUMN_READINGTITLE));
+				r.setReadingtitle(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_READINGTITLE)));
 				r.setCategoryid(rs.getInt(Readings.COLUMN_CATEGORYID));
-				r.setLocation(rs.getString(Readings.COLUMN_LOCATION));
-				r.setAuthor(rs.getString(Readings.COLUMN_AUTHOR));
-				r.setPublisher(rs.getString(Readings.COLUMN_PUBLISHER));
-				r.setYear(rs.getString(Readings.COLUMN_YEAR));
-				r.setTags(rs.getString(Readings.COLUMN_TAGS));
+				r.setLocation(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_LOCATION)));
+				r.setAuthor(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_AUTHOR)));
+				r.setPublisher(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_PUBLISHER)));
+				r.setYear(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_YEAR)));
+				r.setTags(ESAPI.encoder().encodeForHTML(rs.getString(Readings.COLUMN_TAGS)));
 				r.setStatus(rs.getString(Readings.COLUMN_STATUS));
 				readingslist.add(r);
 			}

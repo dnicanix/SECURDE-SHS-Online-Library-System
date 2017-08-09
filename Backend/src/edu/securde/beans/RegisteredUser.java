@@ -6,7 +6,6 @@ public class RegisteredUser {
 	public static final String TABLE_NAME = "users";
 	public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_IDNUM = "idnum";
-	public static final String COLUMN_ACTIVE = "active";
 	public static final String COLUMN_USERTYPE = "usertype";
 	public static final String COLUMN_LASTNAME = "lastname";
 	public static final String COLUMN_MIDDLEINITIAL = "middleinitial";
@@ -17,10 +16,10 @@ public class RegisteredUser {
 	public static final String COLUMN_BIRTHDAY = "birthday";
 	public static final String COLUMN_SECRETQUESTION = "secretquestion";
 	public static final String COLUMN_SECRETANSWER = "secretanswer";
+	public static final String COLUMN_STATUS = "status";
 	
 	private int userid;
 	private String idnum;
-	private int active;
 	private int usertype;
 	private String firstname;
 	private String middleinitial;
@@ -31,18 +30,19 @@ public class RegisteredUser {
 	private String birthday;
 	private String secretquestion;
 	private String secretanswer;
-	
+	private String status;
+	private String role;
+
 	public RegisteredUser(){
 		
 	}
 	
 	
-	public RegisteredUser(String idnum, int active, int usertype, String firstname, String middleinitial,
+	public RegisteredUser(String idnum, int usertype, String firstname, String middleinitial,
 			String lastname, String username, String password, String emailaddress, String birthday,
-			String secretquestion, String secretanswer) {
+			String secretquestion, String secretanswer, String status) {
 		super();
 		this.idnum = idnum;
-		this.active = active;
 		this.usertype = usertype;
 		this.firstname = firstname;
 		this.middleinitial = middleinitial;
@@ -53,6 +53,7 @@ public class RegisteredUser {
 		this.birthday = birthday;
 		this.secretquestion = secretquestion;
 		this.secretanswer = secretanswer;
+		this.status = status;
 	}
 
 	public int getUserid() {
@@ -69,14 +70,6 @@ public class RegisteredUser {
 
 	public void setIdnum(String idnum) {
 		this.idnum = idnum;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public int getUsertype() {
@@ -158,5 +151,24 @@ public class RegisteredUser {
 	public void setSecretanswer(String secretanswer) {
 		this.secretanswer = secretanswer;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	
 }

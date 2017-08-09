@@ -27,7 +27,7 @@
            
            <div class = "row">
                <p class = "subtitle" style="margin-left:10px">
-                   <a href="LogIn.jsp">
+                   <a href="LoginServlet">
                       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                    </a>
 
@@ -46,8 +46,14 @@
 		                   		<label style="color:red;margin-bottom:">${errorMessage}</label>
 		                   	</c:if>  
                         </div>
+                        <c:if test ="${errorMessage != null}">
                         <button id = "button_forgotpassword" type="submit" class="btn btn-primary btn-sm"
-                        			style = "margin-top:-15px;]"> <b> > > </b> </button> 
+                        			style = "margin-top:-15px;"> <b> > > </b> </button> 
+                        </c:if>
+                        <c:if test ="${errorMessage == null}">
+                        <button id = "button_forgotpassword" type="submit" class="btn btn-primary btn-sm">
+                        	<b> > > </b> </button> 
+                        </c:if>                      
                    </form>
                </div>
            </div>

@@ -1,4 +1,4 @@
-package edu.securde.beans;
+package edu.securde.security;
 
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;

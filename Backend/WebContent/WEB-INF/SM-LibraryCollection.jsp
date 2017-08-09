@@ -3,7 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<html lang="en">
+<%@page import="org.owasp.esapi.ESAPI"%>
+<html lang="en">	
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,7 +39,7 @@
             </center>
             <!-- Sidebar brand name -->
             <div class="sidebar-brand">
-                ${fullname}  <p style = "margin-top:-30px;font-size:12px;">${role}</p>
+              ${fullname}<p style = "margin-top:-30px;font-size:12px;">${role}</p>
             </div>
         </div>
 
@@ -58,10 +59,18 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <img src = "img/ic_meetingrooms.png" class = "img_icons"/>
-                    Meeting Rooms
-                </a>
+            	<c:if test = "${role == 'Library Staff'}">
+	                <a href="S-MeetingRooms">
+	                    <img src = "img/ic_meetingrooms.png" class = "img_icons"/>
+	                    Meeting Rooms
+	                </a>
+                </c:if>
+                <c:if test = "${role == 'Library Manager' }">
+                	<a href="M-MeetingRooms">
+	                    <img src = "img/ic_meetingrooms.png" class = "img_icons"/>
+	                    Meeting Rooms
+               		 </a>
+                </c:if>
             </li>
             
             <li>
@@ -177,7 +186,8 @@
                          		 data-todo='{"readingid":"${c.readingid}",
                          		 			"title":"${c.readingtitle}","author":"${c.author}", "type":"${c.categoryid}",
                          		 			 "publisher":"${c.publisher}","year":"${c.year}",
-                         		 			 "location":"${c.location}","tags":"${c.tags}"}'>
+                         		 			 "location":"${c.location}","tags":"${c.tags}",
+                         		 			 "status":"${c.status}"}'>
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> EDIT
                          </button>
                      </p>
@@ -292,15 +302,13 @@
                   <div class="form-group" >
                        <label class="col-sm-4 control-label" id = "label_title">Author</label>
                            <div class="col-sm-8">
-                               <input name = "author" type="text" class="form-control" id="input_author" data-role="tagsinput"
-                               		  required="true">
+                               <input name = "author" type="text" class="form-control" id="input_author" data-role="tagsinput">
                            </div>
                    </div>
                   <div class="form-group" >
                        <label class="col-sm-4 control-label" id = "label_title">Publisher</label>
                            <div class="col-sm-8">
-                               <input name = "publisher" type="text" class="form-control" id="input_publisher"
-                               		  required="true">
+                               <input name = "publisher" type="text" class="form-control" id="input_publisher">
                            </div>
                    </div>
                   <div class="form-group" >
@@ -372,15 +380,13 @@
                   <div class="form-group" >
                        <label class="col-sm-4 control-label" id = "label_title">Author</label>
                            <div class="col-sm-8">
-                               <input name = "author" type="text" class="form-control" id="input_editauthor" data-role="tagsinput"
-                               		  required="true">
+                               <input name = "author" type="text" class="form-control" id="input_editauthor" data-role="tagsinput">
                            </div>
                    </div>
                   <div class="form-group" >
                        <label class="col-sm-4 control-label" id = "label_title">Publisher</label>
                            <div class="col-sm-8">
-                               <input name = "publisher" type="text" class="form-control" id="input_editpublisher"
-                               required = "true">
+                               <input name = "publisher" type="text" class="form-control" id="input_editpublisher">
                            </div>
                    </div>
                   <div class="form-group" >
@@ -402,6 +408,17 @@
                            <div class="col-sm-8">
                                <input name = "tags" type="text" class="form-control" id="input_edittags" data-role="tagsinput"
                                required = "true">
+                           </div>
+                   </div>
+                    <div class="form-group" >
+                       <label class="col-sm-4 control-label" id = "label_title">Status</label>
+                           <div class="col-sm-8">
+                            <select name = "status" class="selectpicker show-tick" data-width="250" style = "height:25px;"
+                            		id="select_editstatus" required = "true">
+                             <option value = "Available">Available</option>
+                             <option value = "Reserved">Reserved</option>
+                             <option value = "Out">Out</option>
+                            </select>
                            </div>
                    </div>
                    <br>
@@ -486,6 +503,7 @@
 	            var year =  $(this).data('todo').year;
 	            var location =  $(this).data('todo').location;
 	            var tags =  $(this).data('todo').tags;
+	            var status = $(this).data('todo').status;
 	            
 	            $("input#hiddeninput-readingid").val(id);
 	            $("input#input_edittitle").val(title);
@@ -497,6 +515,7 @@
 	            $("input#input_editlocation").val(location);
 	            $("input#input_edittags").tagsinput('removeAll');
 	            $("input#input_edittags").tagsinput('add', tags);
+	            $("select#select_editstatus").val(status).change();
 		   });
     </script>
     

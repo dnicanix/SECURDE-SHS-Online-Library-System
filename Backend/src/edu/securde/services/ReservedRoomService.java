@@ -34,6 +34,7 @@ public class ReservedRoomService {
 			
 			while(rs.next()){
 				ReservedRoom rr = new ReservedRoom();
+				rr.setReservedroomid(rs.getInt(ReservedRoom.COLUMN_RESERVEDROOMID));
 				rr.setRoomid(rs.getInt(ReservedRoom.COLUMN_ROOMID));
 				rr.setUserid(rs.getInt(ReservedRoom.COLUMN_USERID));
 				rr.setDate(rs.getString(ReservedRoom.COLUMN_DATE));
@@ -98,5 +99,38 @@ public class ReservedRoomService {
 		}
 		return isReserveSuccess;
 	}
-
+	
+	public static boolean deleteReservedRooms(int reservedroomid){
+		boolean isDeleteSuccess = false;
+		//DELETE FROM reserved_rooms
+		//WHERE reservedroomid = ?;
+		String sql = "DELETE FROM " + ReservedRoom.TABLE_NAME 
+				+ " WHERE " + ReservedRoom.COLUMN_RESERVEDROOMID + " = ?";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reservedroomid);
+			
+			pstmt.executeUpdate();
+			System.out.println("Room reservation successfully deleted in DB!!!");
+			isDeleteSuccess=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			isDeleteSuccess=false;
+		}finally{
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return isDeleteSuccess;
+	}
+	
 }

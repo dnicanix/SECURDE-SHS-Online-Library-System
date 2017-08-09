@@ -4,26 +4,83 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import org.owasp.esapi.ESAPI;
+
+import edu.securde.beans.Readings;
 import edu.securde.beans.RegisteredUser;
 import edu.securde.beans.UserType;
 import edu.securde.db.DBPool;
 
 public class UsersService {
+	
+	public static ArrayList<RegisteredUser> getAllUsers(){
+		ArrayList<RegisteredUser> registeredUsers = new ArrayList<RegisteredUser>();
+		
+		/***Get the readings list***/
+		//SELECT *
+		//FROM users
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT * FROM " + RegisteredUser.TABLE_NAME;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				RegisteredUser user = new RegisteredUser();
+				user = new RegisteredUser();
+				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
+				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
+				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
+				user.setFirstname(ESAPI.encoder().encodeForHTML(rs.getString(RegisteredUser.COLUMN_FIRSTNAME)));
+				user.setMiddleinitial(ESAPI.encoder().encodeForHTML(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL)));
+				user.setLastname(ESAPI.encoder().encodeForHTML(rs.getString(RegisteredUser.COLUMN_LASTNAME)));
+				user.setUsername(ESAPI.encoder().encodeForHTML(rs.getString(RegisteredUser.COLUMN_USERNAME)));
+				user.setPassword(rs.getString(RegisteredUser.COLUMN_PASSWORD));
+				user.setEmailaddress(rs.getString(RegisteredUser.COLUMN_EMAILADDRESS));
+				user.setBirthday(rs.getString(RegisteredUser.COLUMN_BIRTHDAY));
+				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETQUESTION));
+				user.setSecretanswer(rs.getString(RegisteredUser.COLUMN_SECRETANSWER));
+				user.setStatus(rs.getString(RegisteredUser.COLUMN_STATUS));
+				user.setRole(UsersService.getRoleByUsername(user.getUsername()));
+				registeredUsers.add(user);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				pstmt.close();
+				conn.close();
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return registeredUsers;
+	}
 
 	public static void addUser(RegisteredUser user){
-		//INSERT INTO users(idnum, active, usertype, firstname, middleinitial, lastname, username, 
+		//INSERT INTO users(idnum, usertype, firstname, middleinitial, lastname, username, 
 		// password, emailaddress, birthday, secretquestion, secretanswer)
 		//VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 		
 		String sql = "INSERT INTO " + RegisteredUser.TABLE_NAME + "("
-				+ RegisteredUser.COLUMN_IDNUM + "," + RegisteredUser.COLUMN_ACTIVE + ","
+				+ RegisteredUser.COLUMN_IDNUM + ","
 				+ RegisteredUser.COLUMN_USERTYPE + "," + RegisteredUser.COLUMN_FIRSTNAME + ","
 				+ RegisteredUser.COLUMN_MIDDLEINITIAL + ","
 				+ RegisteredUser.COLUMN_LASTNAME + "," + RegisteredUser.COLUMN_USERNAME + ","
 				+ RegisteredUser.COLUMN_PASSWORD + "," + RegisteredUser.COLUMN_EMAILADDRESS + ","
 				+ RegisteredUser.COLUMN_BIRTHDAY + "," + RegisteredUser.COLUMN_SECRETQUESTION + ","
-				+ RegisteredUser.COLUMN_SECRETANSWER + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ RegisteredUser.COLUMN_SECRETANSWER + "," + RegisteredUser.COLUMN_STATUS +
+				") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -31,17 +88,17 @@ public class UsersService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getIdnum());
-			pstmt.setInt(2, user.getActive());
-			pstmt.setInt(3, user.getUsertype());
-			pstmt.setString(4, user.getFirstname());
-			pstmt.setString(5, user.getMiddleinitial());
-			pstmt.setString(6, user.getLastname());
-			pstmt.setString(7, user.getUsername());
-			pstmt.setString(8, user.getPassword());
-			pstmt.setString(9, user.getEmailaddress());
-			pstmt.setString(10, user.getBirthday());
-			pstmt.setString(11, user.getSecretquestion());
-			pstmt.setString(12, user.getSecretanswer());
+			pstmt.setInt(2, user.getUsertype());
+			pstmt.setString(3, user.getFirstname());
+			pstmt.setString(4, user.getMiddleinitial());
+			pstmt.setString(5, user.getLastname());
+			pstmt.setString(6, user.getUsername());
+			pstmt.setString(7, user.getPassword());
+			pstmt.setString(8, user.getEmailaddress());
+			pstmt.setString(9, user.getBirthday());
+			pstmt.setString(10, user.getSecretquestion());
+			pstmt.setString(11, user.getSecretanswer());
+			pstmt.setString(12, user.getStatus());
 			
 			pstmt.executeUpdate();
 			System.out.println("User is added successfully in DB!!!");
@@ -182,7 +239,6 @@ public class UsersService {
 				user = new RegisteredUser();
 				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
 				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
-				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
 				user.setMiddleinitial(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
@@ -193,6 +249,7 @@ public class UsersService {
 				user.setBirthday(rs.getString(RegisteredUser.COLUMN_BIRTHDAY));
 				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETQUESTION));
 				user.setSecretanswer(rs.getString(RegisteredUser.COLUMN_SECRETANSWER));
+				user.setStatus(rs.getString(RegisteredUser.COLUMN_STATUS));
 				
 			}
 		} catch (SQLException e) {
@@ -230,7 +287,6 @@ public class UsersService {
 				user = new RegisteredUser();
 				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
 				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
-				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
@@ -241,7 +297,7 @@ public class UsersService {
 				user.setBirthday(rs.getString(RegisteredUser.COLUMN_BIRTHDAY));
 				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETQUESTION));
 				user.setSecretanswer(rs.getString(RegisteredUser.COLUMN_SECRETANSWER));
-				
+				user.setStatus(rs.getString(RegisteredUser.COLUMN_STATUS));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -280,7 +336,6 @@ public class UsersService {
 				user = new RegisteredUser();
 				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
 				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
-				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
@@ -291,7 +346,7 @@ public class UsersService {
 				user.setBirthday(rs.getString(RegisteredUser.COLUMN_BIRTHDAY));
 				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETQUESTION));
 				user.setSecretanswer(rs.getString(RegisteredUser.COLUMN_SECRETANSWER));
-				
+				user.setStatus(rs.getString(RegisteredUser.COLUMN_STATUS));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -381,7 +436,6 @@ public class UsersService {
 				user = new RegisteredUser();
 				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
 				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
-				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
@@ -392,6 +446,7 @@ public class UsersService {
 				user.setBirthday(rs.getString(RegisteredUser.COLUMN_BIRTHDAY));
 				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETQUESTION));
 				user.setSecretanswer(rs.getString(RegisteredUser.COLUMN_SECRETANSWER));
+				user.setStatus(rs.getString(RegisteredUser.COLUMN_STATUS));
 			}
 			
 			System.out.println("GOT A USER::SUCCESS");
@@ -486,7 +541,6 @@ public class UsersService {
 				user = new RegisteredUser();
 				user.setUserid(rs.getInt(RegisteredUser.COLUMN_USERID));
 				user.setIdnum(rs.getString(RegisteredUser.COLUMN_IDNUM));
-				user.setActive(rs.getInt(RegisteredUser.COLUMN_ACTIVE));
 				user.setUsertype(rs.getInt(RegisteredUser.COLUMN_USERTYPE));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_FIRSTNAME));
 				user.setFirstname(rs.getString(RegisteredUser.COLUMN_MIDDLEINITIAL));
@@ -497,6 +551,7 @@ public class UsersService {
 				user.setBirthday(rs.getString(RegisteredUser.COLUMN_BIRTHDAY));
 				user.setSecretquestion(rs.getString(RegisteredUser.COLUMN_SECRETQUESTION));
 				user.setSecretanswer(rs.getString(RegisteredUser.COLUMN_SECRETANSWER));
+				user.setStatus(rs.getString(RegisteredUser.COLUMN_STATUS));
 			}
 			
 		} catch (SQLException e) {
@@ -516,20 +571,21 @@ public class UsersService {
 		return user;
 	}
 	
-	public static boolean updateActive(int userid, int active){
+	public static boolean updateStatus(int userid, String status){
 		
 		boolean isUpdateSuccess = false;
 		
-		String sql = "UPDATE "+ RegisteredUser.TABLE_NAME + " SET " + RegisteredUser.COLUMN_ACTIVE 
-					+ "=?, WHERE " + RegisteredUser.COLUMN_USERID + "=? ";
+		String sql = "UPDATE "+ RegisteredUser.TABLE_NAME + " SET " + RegisteredUser.COLUMN_STATUS 
+					+ "=? WHERE " + RegisteredUser.COLUMN_USERID + "=? ";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstat = null;
 		
 		try {
 			pstat = conn.prepareStatement(sql);
-			pstat.setInt(1, userid);
-			pstat.setInt(2, active);
+			pstat.setString(1, status);
+			pstat.setInt(2, userid);
+			
 			
 			pstat.executeUpdate();
 			
@@ -691,4 +747,37 @@ public class UsersService {
 		
 		return ifSame;
 	}
+	/*
+	public static void lockUser(int userid){
+		//UPDATE users
+		//SET locked = 1
+		//WHERE userid = 9;
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE " + RegisteredUser.TABLE_NAME +
+					 " SET " + RegisteredUser.COLUMN_LOCKED + "= ?" +
+					 " WHERE " + RegisteredUser.COLUMN_USERID + "= ?";
+		
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, userid);
+			pstmt.executeUpdate();
+			System.out.println("LOCKED USER::SUCCESS!");
+		}catch(SQLException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	*/
 }

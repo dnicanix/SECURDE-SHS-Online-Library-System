@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
@@ -25,7 +27,7 @@
            
            <div class = "row">
                <p class = "subtitle" style="margin-left:10px">
-                   <a href="ForgotPassword.jsp">
+                   <a href="ForgotPasswordServlet">
                       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                    </a>
 
@@ -44,8 +46,14 @@
 		                   		<label style="color:red;">${errorMessage}</label>
 		                   	</c:if>  
                         </div>
+                        <c:if test ="${errorMessage != null}">
                         <button id = "button_securityquestion" type="submit" class="btn btn-primary btn-sm"
                         		style = "margin-top:-15px;"> <b> > > </b> </button> 
+                        </c:if>
+                        <c:if test ="${errorMessage == null}">
+                        <button id = "button_securityquestion" type="submit" class="btn btn-primary btn-sm"> 
+                        		<b> > > </b> </button> 
+                        </c:if>
                    </form>
                </div>
            </div>

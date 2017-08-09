@@ -32,7 +32,10 @@
                    <form id = "form_login" action = "LogIn" method = "POST">
                    <c:if test ="${errorMessage != null}">
                    	<label style="color:red;margin-top:-20px;">${errorMessage}</label>
-                   </c:if>  
+                   </c:if>
+                   <c:if test ="${lockMessage != null}">
+                   	<label style="color:red;margin-top:-20px;">${lockMessage}</label>
+                   </c:if>   
                     <div class="form-group row">
                         <label for="username">Username</label>
                         <input name = "username" type="text" class="form-control" id="input_username" required="true">
@@ -47,7 +50,7 @@
                    </form>
                    
                    <div id = "div_forgotpass_signup">
-                       <a href = "ForgotPassword.jsp">Forgot Password?</a> || <a href = "SignUp.jsp">Sign Up</a>
+                       <a href = "ForgotPasswordServlet">Forgot Password?</a> || <a href = "SignUpServlet">Sign Up</a>
                    </div>
                </div>
            </div>

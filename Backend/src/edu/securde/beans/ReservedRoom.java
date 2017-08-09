@@ -3,12 +3,14 @@ package edu.securde.beans;
 public class ReservedRoom {
 
 	public static final String TABLE_NAME = "reserved_rooms";
+	public static final String COLUMN_RESERVEDROOMID = "reservedroomid";
 	public static final String COLUMN_ROOMID = "roomid";
 	public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_DATE = "date";
 	public static final String COLUMN_STARTTIME = "starttime";
 	public static final String COLUMN_ENDTIME = "endtime";
 	
+	private int reservedroomid;
 	private int roomid;
 	private int userid;
 	private String date;
@@ -19,6 +21,7 @@ public class ReservedRoom {
 		
 	}
 
+	
 	public ReservedRoom(int roomid, int userid, String date, String starttime, String endtime) {
 		super();
 		this.roomid = roomid;
@@ -27,6 +30,16 @@ public class ReservedRoom {
 		this.starttime = starttime;
 		this.endtime = endtime;
 	}
+	
+	public int getReservedroomid() {
+		return reservedroomid;
+	}
+
+
+	public void setReservedroomid(int reservedroomid) {
+		this.reservedroomid = reservedroomid;
+	}
+
 
 	public int getRoomid() {
 		return roomid;

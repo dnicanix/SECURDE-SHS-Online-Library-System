@@ -62,7 +62,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="MeetingRooms">
                     <img src = "img/ic_meetingrooms.png" class = "img_icons"/>
                     Meeting Rooms
                 </a>
